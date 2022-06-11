@@ -1,0 +1,51 @@
+
+.loading-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+}
+
+.loader{
+    height: 100%;
+}
+
+h1 {
+    color: white;
+    animation-name: breathe;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes breathe {
+    0% {
+      font-size: 45px;
+    }
+    50% {
+      font-size: 43px;
+    }
+    100% {
+      font-size: 45px;
+    }
+  }

@@ -1,19 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import LoadingDisplay from "./LoadingDisplay";
 import SeasonDisplay from "./SeasonDisplay";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { lat: null };
-  }
-  render() {
-    window.navigator.geolocation.getCurrentPosition(
-      (position) => console.log(position),
-      (err) => console.log(err)
-    );
+  state = { lat: null, errMessage: "" };
 
-    return <div>Latitude: </div>;
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => this.setState({ lat: position.coords.latitude }),
+      (err) => this.setState({ errMessage: err.message })
+    );
+  }
+
+  renderHelper() {
+    if (this.state.errMessage && !this.state.lat) {
+      return <div>Error: {this.state.errMessage}</div>;
+    } else if (!this.state.errMessage && this.state.lat) {
+      return <SeasonDisplay lat={this.state.lat} />;
+    }
+    return <LoadingDisplay message="Please accept location request" />;
+  }
+
+  render() {
+    return <div className="content wrapper">{this.renderHelper()}</div>;
   }
 }
 
