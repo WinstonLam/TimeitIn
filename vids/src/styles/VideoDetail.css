@@ -1,0 +1,37 @@
+
+
+.video-detail {
+    width: 70%;
+    z-index: 3;
+    position: relative;
+    color: white;
+    align-items: center;
+    border-radius: 2rem;
+    border-style: solid;
+    border-color: aliceblue;
+    height: 10%;
+    margin: 3px;
+    padding: 10px;
+    margin-left: 14%;
+    animation: fadeIn 2s ease-in;
+}
+
+.video-detail h2 {
+    margin-top: 1%;
+    margin-bottom: -1%;
+}
+
+.ui.embed{
+    border-radius: 2rem !important;
+    margin: 10px !important;
+    animation: fadeIn 1s ease-in !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

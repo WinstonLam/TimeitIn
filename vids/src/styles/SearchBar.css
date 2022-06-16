@@ -1,0 +1,40 @@
+.ui.container {
+    margin-top: 5%;
+    position: relative;
+    z-index: 5;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    color: aliceblue;
+    font-size: 45px;
+}
+
+
+.ui.segment {
+    border-style: outset;
+    border-radius: 2rem;
+    border-width: 3px;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.field input{
+    background: aliceblue !important;
+    border-radius: 2rem !important;
+    margin-top: 2% !important;
+    width: 50% !important;
+    height: 55px;
+    font-size: 22px !important;
+}
+
+.ui.search {
+    margin-top: 5px;
+}
+
