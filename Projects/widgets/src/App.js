@@ -38,8 +38,8 @@ function App() {
   const [selectedColor, setColor] = useState(options[0]);
   return (
     <div className="App">
-      <Accordion items={items} />
-      <Search />
+      {/* <Accordion items={items} />
+      <Search /> */}
       <Dropdown
         options={options}
         selected={selectedColor}
