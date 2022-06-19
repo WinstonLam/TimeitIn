@@ -1,12 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Dropdown = ({ options, selected, OnColorChange }) => {
+const Dropdown = ({ label, options, selected, OnSelectedChange }) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
 
   useEffect(() => {
-    document.body.addEventListener("click", () => {
+    const onBodyClick = (event) => {
+      if (ref.current.contains(event.target)) {
+        return;
+      }
       setOpen(false);
-    });
+    };
+
+    document.body.addEventListener("click", onBodyClick);
+
+    return () => {
+      document.body.removeEventListener("click", onBodyClick);
+    };
   }, []);
 
   const renderedOptions = options.map((option) => {
@@ -17,7 +27,7 @@ const Dropdown = ({ options, selected, OnColorChange }) => {
         key={option.value}
         className="item"
         onClick={() => {
-          OnColorChange(option);
+          OnSelectedChange(option);
         }}
       >
         {option.label}
@@ -26,9 +36,9 @@ const Dropdown = ({ options, selected, OnColorChange }) => {
   });
 
   return (
-    <div className="ui form">
+    <div ref={ref} className="ui form">
       <div className="field">
-        <label className="label">Select a color</label>
+        <label className="label">{label}</label>
         <div
           onClick={() => {
             setOpen(!open);
@@ -41,6 +51,9 @@ const Dropdown = ({ options, selected, OnColorChange }) => {
             {renderedOptions}
           </div>
         </div>
+        <p style={{ color: selected.value, marginTop: 10 }}>
+          The value is now {selected.value}
+        </p>
       </div>
     </div>
   );

@@ -3,48 +3,36 @@ import "./styles/App.css";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
+import Translate from "./components/Translate";
+import data from "./data";
 
-const items = [
-  {
-    title: "test title",
-    content: "this is test content",
-  },
-  {
-    title: "test title",
-    content: "this is test content",
-  },
-  {
-    title: "test title",
-    content: "this is test content",
-  },
-];
-
-const options = [
-  {
-    label: "the color red",
-    value: "red",
-  },
-  {
-    label: "the color green",
-    value: "green",
-  },
-  {
-    label: "the color blue",
-    value: "blue",
-  },
-];
+const { items, colors, languages } = data;
 
 function App() {
-  const [selectedColor, setColor] = useState(options[0]);
+  const [selectedColor, setColor] = useState(colors[0]);
+  const [showDropdown, setShowDropdown] = useState(false);
   return (
     <div className="App">
       {/* <Accordion items={items} />
-      <Search /> */}
-      <Dropdown
-        options={options}
-        selected={selectedColor}
-        OnColorChange={setColor}
-      />
+      <Search />  
+      <button
+        onClick={() => {
+          setShowDropdown(!showDropdown);
+        }}
+      >
+        Toggle Dropdown
+      </button>
+      {showDropdown ? (
+        <Dropdown
+          label="Select a color"
+          options={colors}
+          selected={selectedColor}
+          OnSelectedChange={setColor}
+        />
+      ) : 
+
+      null} */}
+      <Translate options={languages} />
     </div>
   );
 }
