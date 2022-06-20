@@ -5,34 +5,33 @@ import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
 import Translate from "./components/Translate";
 import data from "./data";
-
+import Route from "./components/route";
+import Header from "./components/Header";
 const { items, colors, languages } = data;
 
 function App() {
   const [selectedColor, setColor] = useState(colors[0]);
-  const [showDropdown, setShowDropdown] = useState(false);
+
   return (
     <div className="App">
-      {/* <Accordion items={items} />
-      <Search />  
-      <button
-        onClick={() => {
-          setShowDropdown(!showDropdown);
-        }}
-      >
-        Toggle Dropdown
-      </button>
-      {showDropdown ? (
+      <Header />
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      <Route path="/list">
+        <Search />;
+      </Route>
+      <Route path="/dropdown">
         <Dropdown
           label="Select a color"
-          options={colors}
           selected={selectedColor}
+          options={colors}
           OnSelectedChange={setColor}
         />
-      ) : 
-
-      null} */}
-      <Translate options={languages} />
+      </Route>
+      <Route path="/translate">
+        <Translate options={languages} />
+      </Route>
     </div>
   );
 }

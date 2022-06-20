@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const Dropdown = ({ label, options, selected, OnSelectedChange }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const ref = useRef();
 
   useEffect(() => {

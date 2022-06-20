@@ -1,40 +1,31 @@
-import React from "react";
-import Youtube from "../api/Youtube";
+import React, { useState, useEffect } from "react";
 import "../styles/App.css";
 import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
+import useVideos from "../hooks/useVideos";
 
-class App extends React.Component {
-  state = { videos: [], selectedVideo: null };
+const App = () => {
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videos, search] = useVideos("");
 
-  onSubmit = async (term) => {
-    const response = await Youtube.get("search/", { params: { q: term } });
-    this.setState({ videos: response.data.items });
-  };
+  useEffect(() => {
+    setSelectedVideo(videos[0]);
+  }, [videos]);
 
-  onVideoSelect = (video) => {
-    this.setState({ selectedVideo: video });
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <SearchBar onSubmit={this.onSubmit} />
-        <div className="video-content">
-          <VideoDetail video={this.state.selectedVideo} />
-          <VideoList
-            videos={this.state.videos}
-            onVideoSelect={this.onVideoSelect}
-          />
-        </div>
-
-        <div className="background-container">
-          <div className="stars"></div>
-          <div className="twinkling"></div>
-        </div>
+  return (
+    <div className="App">
+      <SearchBar onSubmit={search} />
+      <div className="video-content">
+        <VideoDetail video={selectedVideo} />
+        <VideoList videos={videos} onVideoSelect={setSelectedVideo} />
       </div>
-    );
-  }
-}
+
+      <div className="background-container">
+        <div className="stars"></div>
+        <div className="twinkling"></div>
+      </div>
+    </div>
+  );
+};
 export default App;

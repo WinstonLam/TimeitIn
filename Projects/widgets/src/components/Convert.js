@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { debounce } from "debounce";
 
 const Convert = ({ language, text }) => {
-  useEffect(() => {
-    axios.post(
+  const [translated, setTranslated] = useState("");
+
+  const doTranslation = async () => {
+    const { data } = await axios.post(
       "https://translation.googleapis.com/language/translate/v2",
       {},
       {
@@ -14,8 +17,24 @@ const Convert = ({ language, text }) => {
         },
       }
     );
-  }, [language, text]);
-  return <div />;
+    setTranslated(data.data.translations[0].translatedText);
+  };
+
+  const debounced = debounce(doTranslation, 500);
+
+  useEffect(() => {
+    debounced();
+
+    return () => {
+      debounced.clear();
+    };
+  }, [debounced, language, text]);
+
+  return (
+    <div>
+      <h1 className="ui header">{translated}</h1>
+    </div>
+  );
 };
 
 export default Convert;
