@@ -1,0 +1,24 @@
+{
+  "streams": [
+    {
+      "title": "my stream",
+      "description": "awesome stream",
+      "id": 1
+    },
+    {
+      "title": "test",
+      "description": "test",
+      "id": 2
+    },
+    {
+      "title": "whats poppin",
+      "description": "test",
+      "id": 3
+    },
+    {
+      "title": "whats poppin",
+      "description": "test",
+      "id": 4
+    }
+  ]
+}
