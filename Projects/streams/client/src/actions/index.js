@@ -1,5 +1,6 @@
 import * as types from "./actionTypes";
 import streams from "../apis/streams";
+import history from "../history";
 
 export const signIn = (userId) => {
   return {
@@ -15,9 +16,16 @@ export const signOut = () => {
 };
 
 export const createStream = (formValues) => {
-  return async function (dispatch) {
-    const response = await streams.post("/streams", formValues);
+  return async function (dispatch, getState) {
+    const { userId } = getState().auth;
+    const response = await streams.post("/streams", { ...formValues, userId });
     dispatch({ type: types.CREATE_STREAM, payload: response.data });
+
+    history.push("/");
+    // in case timeout is needed:
+    //   setTimeout(() => {
+    //     history.push("/streams/new");
+    //   }, 1500);
   };
 };
 
@@ -30,7 +38,7 @@ export const fetchStreams = () => {
 
 export const fetchStream = (streamId) => {
   return async function (dispatch) {
-    const response = await streams.post(`/streams/${streamId}`);
+    const response = await streams.get(`/streams/${streamId}`);
     dispatch({ type: types.FETCH_STREAM, payload: response.data });
   };
 };

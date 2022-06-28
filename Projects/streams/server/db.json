@@ -1,24 +1,21 @@
 {
   "streams": [
     {
-      "title": "my stream",
-      "description": "awesome stream",
+      "title": "Stream 1",
+      "description": "This stream has no userId",
       "id": 1
     },
     {
-      "title": "test",
-      "description": "test",
+      "title": "Stream 2",
+      "description": "This stream has a userId",
+      "userId": "100138207035479269177",
       "id": 2
     },
     {
-      "title": "whats poppin",
-      "description": "test",
+      "title": "weasd",
+      "description": "asdas",
+      "userId": "100138207035479269177",
       "id": 3
-    },
-    {
-      "title": "whats poppin",
-      "description": "test",
-      "id": 4
     }
   ]
 }
