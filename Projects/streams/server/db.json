@@ -4,18 +4,6 @@
       "title": "Stream 1",
       "description": "This stream has no userId",
       "id": 1
-    },
-    {
-      "title": "Stream 2",
-      "description": "This stream has a userId",
-      "userId": "100138207035479269177",
-      "id": 2
-    },
-    {
-      "title": "weasd",
-      "description": "asdas",
-      "userId": "100138207035479269177",
-      "id": 3
     }
   ]
 }

@@ -45,14 +45,16 @@ export const fetchStream = (streamId) => {
 
 export const editStream = (streamId, formValues) => {
   return async function (dispatch) {
-    const response = await streams.put(`/streams/${streamId}`, formValues);
+    const response = await streams.patch(`/streams/${streamId}`, formValues);
     dispatch({ type: types.EDIT_STREAM, payload: response.data });
+    history.push("/");
   };
 };
 
 export const deleteStream = (streamId) => {
   return async function (dispacth) {
-    const response = await streams.delete(`/streams/${streamId}`);
-    dispacth({ type: types.DELETE_STREAM, payload: response.data });
+    await streams.delete(`/streams/${streamId}`);
+    dispacth({ type: types.DELETE_STREAM, payload: streamId });
+    history.push("/");
   };
 };

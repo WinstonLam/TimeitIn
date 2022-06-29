@@ -1,10 +1,9 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { Link } from "react-router-dom";
 
 const renderError = ({ error, touched }) => {
-  console.log(touched);
   if (touched && error) {
-    console.log(error);
     return (
       <div className="ui error message">
         <div className="header">{error}</div>
@@ -49,6 +48,9 @@ const StreamForm = ({ onSubmit, handleSubmit }) => {
           label="Enter Description"
         />
         <button className="ui button primary">Submit</button>
+        <Link to="/" className="ui button negative">
+          Cancel
+        </Link>
       </form>
     </div>
   );
