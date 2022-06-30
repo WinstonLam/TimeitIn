@@ -44,7 +44,9 @@ const StreamList = ({ fetchStreams, streams, currentUserId, isSignedIn }) => {
         {renderAdmin(stream)}
         <i className="huge middle aligned icon camera" />
         <div className="content">
-          <h3>{stream.title}</h3>
+          <Link to={`/streams/${stream.id}`} className="header">
+            <h3>{stream.title}</h3>
+          </Link>
           <div className="description">
             <h4>{stream.description}</h4>
           </div>
