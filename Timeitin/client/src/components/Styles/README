@@ -1,0 +1,4 @@
+Because we make use of material ui we cannot directly edit components
+using standard css styling, instead we will make use of the styled-components
+API method provided my metarial ui for more on this visit:
+https://mui.com/system/basics/
