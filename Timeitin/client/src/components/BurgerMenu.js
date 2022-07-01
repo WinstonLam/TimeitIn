@@ -8,17 +8,22 @@ import MenuItem from "@mui/material/MenuItem";
 
 const BurgerMenu = ({ options }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [rotateBurger, setRotateBurger] = useState(false);
 
   const handleOpenNavMenu = (event) => {
+    setRotateBurger(!rotateBurger);
     setAnchorElNav(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
+    setRotateBurger(!rotateBurger);
     setAnchorElNav(null);
   };
 
+  const rotate = rotateBurger ? "rotate(90deg)" : "rotate(0)";
+
   return (
-    <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+    <Box sx={{ display: { xs: "flex", md: "none" } }}>
       <IconButton
         size="large"
         aria-label="account of current user"
@@ -26,6 +31,7 @@ const BurgerMenu = ({ options }) => {
         aria-haspopup="true"
         onClick={handleOpenNavMenu}
         color="inherit"
+        style={{ transform: rotate, transition: "all 0.2s linear" }}
       >
         <MenuIcon />
       </IconButton>

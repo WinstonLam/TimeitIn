@@ -1,4 +1,4 @@
-import { AppBar, Container, Typography } from "@mui/material";
+import { AppBar, Container, Typography, Toolbar } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const Header = styled(AppBar)({
@@ -9,15 +9,22 @@ export const Wrapper = styled(Container)({
   maxWidth: "xl",
 });
 
-export const Name = styled(Typography)({
-  mr: 2,
-  flexGrow: 2,
-  alignItems: "center",
-  display: { xs: "none", md: "flex" },
+export const InnerWrapper = styled(Toolbar)({
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "10px",
+
+  disableGutters: true,
+});
+
+export const HeaderSection = styled(Typography)({
+  display: "flex",
   fontWeight: 700,
   letterSpacing: ".3rem",
   color: "inherit",
   textDecoration: "none",
+  alignItems: "center",
+  justifyContent: "center",
 });
 
 export const NameMobile = styled(Typography)({
