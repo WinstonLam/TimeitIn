@@ -15,19 +15,17 @@ import * as api from "../api/index.js";
 //   };
 // };
 
-// export const createUser = (formValues) => {
-//   return async function (dispatch, getState) {
-//     const { userId } = getState().auth;
-//     const response = await users.post("/users", { ...formValues, userId });
-//     dispatch({ type: types.CREATE_USER, payload: response.data });
-
-//     history.push("/");
-//     // in case timeout is needed:
-//     //   setTimeout(() => {
-//     //     history.push("/users/new");
-//     //   }, 1500);
-//   };
-// };
+export const createUser = (newUser) => {
+  return async function (dispatch, getState) {
+    try {
+      const response = await api.createUser(newUser);
+      dispatch({ type: types.CREATE_USER, payload: response.data });
+      // history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const fetchUsers = () => {
   return async function (dispatch) {

@@ -1,11 +1,11 @@
 import * as types from "../actions/actionTypes";
 
-const usersReducer = (state = {}, action) => {
+const usersReducer = (state = [], action) => {
   switch (action.type) {
     case types.CREATE_USER:
     case types.FETCH_USER:
     case types.EDIT_USER:
-      return state; //{ ...state, [action.payload.id]: action.payload };
+      return [...state, action.payload];
     case types.FETCH_USERS:
       // const newObj = {};
       // action.payload.forEach((element) => {

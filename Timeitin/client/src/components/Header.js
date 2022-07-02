@@ -1,6 +1,7 @@
 import * as React from "react";
 import BurgerMenu from "./BurgerMenu";
 import { Header, Wrapper, HeaderSection, InnerWrapper } from "./Styles/Header";
+import "./Styles/Header.css";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 
@@ -30,10 +31,15 @@ const ResponsiveAppBar = () => {
               style={{ maxWidth: "40px" }}
             />
           </HeaderSection>
-          <HeaderSection noWrap style={{ justifyContent: "right" }}>
-            <BurgerMenu options={pages} />
+          <HeaderSection noWrap>
+            <BurgerMenu options={pages} style={{ justifyContent: "right" }} />
 
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+              }}
+              style={{ justifyContent: "left" }}
+            >
               {pages.map((page, idx) => (
                 <Link to={`/${links[idx]}`} key={page} sx={{ color: "white" }}>
                   {page}

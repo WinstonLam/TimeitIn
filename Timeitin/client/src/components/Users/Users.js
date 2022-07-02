@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { fetchUsers } from "../../actions";
 import User from "./User/User";
 import Form from "../Form/Form";
+import "../Styles/Users.css";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Users = () => {
   console.log(users);
 
   return (
-    <div>
+    <div className="container">
       <h3>Users</h3>
       <User />
       <Form />
