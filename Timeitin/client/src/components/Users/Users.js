@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchUsers } from "../../actions";
 import User from "./User/User";
+import Form from "../Form/Form";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Users = () => {
     <div>
       <h3>Users</h3>
       <User />
+      <Form />
     </div>
   );
 };

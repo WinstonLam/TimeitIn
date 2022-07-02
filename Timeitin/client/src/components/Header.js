@@ -2,10 +2,12 @@ import * as React from "react";
 import BurgerMenu from "./BurgerMenu";
 import { Header, Wrapper, HeaderSection, InnerWrapper } from "./Styles/Header";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+
 import TimeitinLogo from "../images/TimeitinLogo.png";
 
 const pages = ["Create Account", "Settings"];
+const links = ["users/new", "settings"];
 
 const ResponsiveAppBar = () => {
   return (
@@ -30,11 +32,12 @@ const ResponsiveAppBar = () => {
           </HeaderSection>
           <HeaderSection noWrap style={{ justifyContent: "right" }}>
             <BurgerMenu options={pages} />
+
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button key={page} sx={{ color: "white" }}>
+              {pages.map((page, idx) => (
+                <Link to={`/${links[idx]}`} key={page} sx={{ color: "white" }}>
                   {page}
-                </Button>
+                </Link>
               ))}
             </Box>
           </HeaderSection>
