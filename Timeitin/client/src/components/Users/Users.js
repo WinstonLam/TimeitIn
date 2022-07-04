@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchUsers } from "../../actions";
 import User from "./User/User";
-import Form from "../Form";
+import Button from "../Button";
 // import { Collapse } from "@mui/material";
 import { Link } from "react-router-dom";
 import "../Styles/Users.css";
@@ -28,11 +28,11 @@ const Users = () => {
     <div className="container">
       <div className="wrapper">
         <div className="user-header">
-          <div className="actions">
+          <div className="user-actions">
             <Link to="/users/new">
-              <button className="create-user">Create User</button>
+              <Button text="Create User"></Button>
             </Link>
-            <button className="delete-user">Delete User(s)</button>
+            <Button text="Delete User(s)" bgColor="red"></Button>
           </div>
           <div className="selections"></div>
         </div>

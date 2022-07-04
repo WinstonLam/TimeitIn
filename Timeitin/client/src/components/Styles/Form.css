@@ -1,10 +1,8 @@
-
-
-
-.actions{
-    width: 50%;
+.form-actions{
+    width: 90%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
 }
 .user-icon {
     height: 125px;
@@ -42,11 +40,11 @@ form{
     display: flex;
     flex-direction: column;
     justify-content: left;
-
+    z-index: 2;
 }
 .form-row-4 { grid-area: 2 / 1 / 3 / 2; }
 .form-row-5 { grid-area: 2 / 2 / 3 / 3; }
-.form-row-6 { grid-area: 3 / 1 / 4 / 4; }
+.form-row-6 { grid-area: 3 / 1 / 4 / 4; width: 95%; }
 .form-row-7 {
     grid-area: 4 / 1 / 5 / 4;    width: 100%;
     display: flex;

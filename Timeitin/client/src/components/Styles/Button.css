@@ -1,0 +1,40 @@
+.button{
+    margin: 20px;
+    border: none;
+    border-radius: 2rem;
+    height: 50px;
+    width: 150px;
+    cursor: pointer;
+    box-shadow: -3px 5px 5px 0px rgba(0,0,0,0.34);
+    -webkit-box-shadow: -3px 5px 5px 0px rgba(0,0,0,0.34);
+    -moz-box-shadow: -3px 5px 5px 0px rgba(0,0,0,0.34);
+    -webkit-transition: all 0.3s 0s ease-in-out;
+    -moz-transition: all 0.3s 0s ease-in-out;
+    -o-transition: all 0.3s 0s ease-in-out;
+    transition: all 0.3s 0s ease-in-out;
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d( 0, 0, 0);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+.button:hover{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    transform:  translate3d( -3px, 3px, 0);
+}
+
+.button:active {
+    animation-name: clicked;
+    animation-duration: 0.5s
+}
+
+@keyframes clicked {
+    0% {filter: none;}
+    50% {filter: brightness(85%);}
+    100% {filter: none; transform:  translate3d( -5px, 5px, 0)}
+}

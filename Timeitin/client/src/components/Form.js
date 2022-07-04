@@ -1,28 +1,32 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FormWrapper } from "./Styles/Form";
 import { createUser } from "../actions";
 import ColorPicker from "./ColorPicker";
-import { TextField, Button, Alert, AlertTitle, Collapse } from "@mui/material";
+import { TextField, Alert, AlertTitle, Collapse } from "@mui/material";
+import Button from "../components/Button";
 
 import "./Styles/Form.css";
 import "./Styles/Form.js";
 
 const Form = () => {
-  const [formValues, setFormValues] = useState({
-    firstname: "",
-    lastname: "",
-    pincode: "",
-    birthdate: "",
-    phone: "",
-  });
-  const [errors, setErrors] = useState({});
   const [selectedColor, setSelectedColor] = useState({
     r: 84,
     g: 187,
     b: 255,
     a: 0.9,
   });
+  const [formValues, setFormValues] = useState({
+    firstname: "",
+    lastname: "",
+    color: `rgba(${selectedColor.r}, ${selectedColor.g}, ${selectedColor.b}, ${selectedColor.a}
+      )`,
+    pincode: "",
+    birthdate: "",
+    phone: "",
+  });
+  const [errors, setErrors] = useState({});
+
   const [succesSubmition, setSuccessSubmition] = useState(false);
   const [colorPicker, setColorPicker] = useState(false);
   const dispatch = useDispatch();
@@ -36,8 +40,7 @@ const Form = () => {
     temp.phone = formValues.phone ? "" : "Phone is required";
     setErrors({ ...temp });
     // use every() method to check if all requred fields are filled
-    console.log(Object.values(temp).every((field) => field !== ""));
-    return Object.values(temp).every((field) => field !== "");
+    return Object.values(formValues).every((field) => field !== "");
   };
 
   const handleColorToggle = (e) => {
@@ -47,14 +50,17 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
+    if (!validate()) {
       return console.log("Form contains invalid fields");
     }
+    setFormValues({ ...formValues, color: selectedColor });
     dispatch(createUser(formValues));
     setSuccessSubmition(true);
     return <div>User created</div>;
   };
-  const clear = () => {};
+  const clear = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="container">
@@ -81,9 +87,6 @@ const Form = () => {
           </div>
         </div>
         <form autoComplete="off" onSubmit={handleSubmit}>
-          {/* <Typography variant="h6">
-          {currentId ? `Editing "${post.title}"` : "Creating a Memory"}
-        </Typography> */}
           <div className="form-row-1">
             <TextField
               name="firstName"
@@ -181,23 +184,15 @@ const Form = () => {
           </div>
 
           <div className="form-row-7">
-            <div className="actions">
+            <div className="form-actions">
+              <Button text="Submit"></Button>
               <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                type="submit"
-              >
-                Submit
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                size="large"
+                text="Clear"
+                bgColor="grey"
+                link="/users"
                 onClick={clear}
-              >
-                Clear
-              </Button>
+              ></Button>
+              <Button text="Cancel" bgColor="red" link="/users"></Button>
             </div>
           </div>
         </form>
