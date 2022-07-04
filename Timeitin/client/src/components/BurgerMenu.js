@@ -4,9 +4,10 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 
-const BurgerMenu = ({ options }) => {
+const BurgerMenu = ({ pages, links }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [rotateBurger, setRotateBurger] = useState(false);
 
@@ -53,9 +54,14 @@ const BurgerMenu = ({ options }) => {
           display: { xs: "block", md: "none" },
         }}
       >
-        {options.map((page) => (
-          <MenuItem key={page} onClick={handleCloseNavMenu}>
-            <Typography textAlign="center">{page}</Typography>
+        {pages.map((page, idx) => (
+          <MenuItem
+            component={Link}
+            to={links[idx]}
+            key={page}
+            onClick={handleCloseNavMenu}
+          >
+            <Typography textAlign="center"> {page}</Typography>
           </MenuItem>
         ))}
       </Menu>

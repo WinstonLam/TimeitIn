@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 
 import TimeitinLogo from "../images/TimeitinLogo.png";
 
-const pages = ["Create Account", "Settings"];
-const links = ["users/new", "settings"];
+const pages = ["Users", "Settings"];
+const links = ["users", "settings"];
 
 const ResponsiveAppBar = () => {
   return (
@@ -32,7 +32,11 @@ const ResponsiveAppBar = () => {
             />
           </HeaderSection>
           <HeaderSection noWrap>
-            <BurgerMenu options={pages} style={{ justifyContent: "right" }} />
+            <BurgerMenu
+              links={links}
+              pages={pages}
+              style={{ justifyContent: "right" }}
+            />
 
             <Box
               sx={{
@@ -41,7 +45,7 @@ const ResponsiveAppBar = () => {
               style={{ justifyContent: "left" }}
             >
               {pages.map((page, idx) => (
-                <Link to={`/${links[idx]}`} key={page} sx={{ color: "white" }}>
+                <Link to={links[idx]} key={page} sx={{ color: "white" }}>
                   {page}
                 </Link>
               ))}
