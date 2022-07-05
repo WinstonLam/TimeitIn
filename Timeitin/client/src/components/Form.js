@@ -23,7 +23,7 @@ const Form = () => {
       )`,
     pincode: "",
     birthdate: "",
-    phone: "",
+    phonenumber: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -37,7 +37,7 @@ const Form = () => {
     temp.lastname = formValues.lastname ? "" : "Lastname is required";
     temp.pincode = formValues.pincode ? "" : "Pincode is required";
     temp.birthdate = formValues.birthdate ? "" : "Age is required";
-    temp.phone = formValues.phone ? "" : "Phone is required";
+    temp.phonenumber = formValues.phonenumber ? "" : "Phonenumber is required";
     setErrors({ ...temp });
     // use every() method to check if all requred fields are filled
     return Object.values(formValues).every((field) => field !== "");
@@ -169,16 +169,16 @@ const Form = () => {
           </div>
           <div className="form-row-6">
             <TextField
-              name="phonenumber"
+              name="phonernumber"
               variant="outlined"
               label="Phonenumber"
               fullWidth
               style={{ margin: "20px" }}
-              value={formValues.phone}
-              error={errors.phone}
-              helperText={errors.phone}
+              value={formValues.phonenumber}
+              error={errors.phonenumber}
+              helperText={errors.phonenumber}
               onChange={(e) =>
-                setFormValues({ ...formValues, phone: e.target.value })
+                setFormValues({ ...formValues, phonenumber: e.target.value })
               }
             />
           </div>

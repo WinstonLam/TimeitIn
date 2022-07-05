@@ -4,11 +4,18 @@ import { useDispatch } from "react-redux";
 import { fetchUsers } from "../../actions";
 import User from "./User/User";
 import Button from "../Button";
-// import { Collapse } from "@mui/material";
+import { Grid } from "@mui/material";
+import { GridItem } from "../Styles/Users";
 import { Link } from "react-router-dom";
 import "../Styles/Users.css";
 
 const Users = () => {
+  const users = useSelector((state) => state.users);
+  const labels = {
+    firstname: "Name",
+    pincode: "Pincode",
+    phonenumber: "Phonenumber",
+  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,8 +28,28 @@ const Users = () => {
     };
   }, [dispatch]);
 
-  const users = useSelector((state) => state.users);
-  console.log(users);
+  const renderUsers = () => {
+    console.log(users);
+    if (users.length > 0) {
+      return (
+        <>
+          <GridItem item>
+            <User header={true} user={labels}></User>
+          </GridItem>
+          {users.map((user) => (
+            <GridItem key={user.id} item>
+              <User user={user}></User>
+            </GridItem>
+          ))}
+        </>
+      );
+    }
+    return (
+      <GridItem item>
+        <User header={true} user={labels}></User>
+      </GridItem>
+    );
+  };
 
   return (
     <div className="container">
@@ -36,11 +63,10 @@ const Users = () => {
           </div>
           <div className="selections"></div>
         </div>
-        <div className="user-list">
-          <User />
-        </div>
+        <Grid container sx={{ display: "flex", flexDirection: "column" }}>
+          {renderUsers()}
+        </Grid>
       </div>
-      {/* <Form /> */}
     </div>
   );
 };
