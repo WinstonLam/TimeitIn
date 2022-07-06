@@ -37,9 +37,12 @@ const Users = () => {
             <User header={true} user={labels}></User>
           </GridItem>
           {users.map((user) => (
-            <GridItem key={user.id} item>
-              <User user={user}></User>
-            </GridItem>
+            <>
+              <hr class="solid"></hr>
+              <GridItem key={user.id} item>
+                <User user={user}></User>
+              </GridItem>
+            </>
           ))}
         </>
       );

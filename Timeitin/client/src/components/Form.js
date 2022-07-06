@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { FormWrapper } from "./Styles/Form";
 import { createUser } from "../actions";
 import ColorPicker from "./ColorPicker";
+import DateSelector from "./DatePicker";
 import { TextField, Alert, AlertTitle, Collapse } from "@mui/material";
 import Button from "../components/Button";
 
@@ -10,17 +11,10 @@ import "./Styles/Form.css";
 import "./Styles/Form.js";
 
 const Form = () => {
-  const [selectedColor, setSelectedColor] = useState({
-    r: 84,
-    g: 187,
-    b: 255,
-    a: 0.9,
-  });
   const [formValues, setFormValues] = useState({
     firstname: "",
     lastname: "",
-    color: `rgba(${selectedColor.r}, ${selectedColor.g}, ${selectedColor.b}, ${selectedColor.a}
-      )`,
+    color: "rgba(84, 187, 255, 0.9)",
     pincode: "",
     birthdate: "",
     phonenumber: "",
@@ -36,7 +30,7 @@ const Form = () => {
     temp.firstname = formValues.firstname ? "" : "Firstname is required";
     temp.lastname = formValues.lastname ? "" : "Lastname is required";
     temp.pincode = formValues.pincode ? "" : "Pincode is required";
-    temp.birthdate = formValues.birthdate ? "" : "Age is required";
+    temp.birthdate = formValues.birthdate ? "" : "Date of birth is required";
     temp.phonenumber = formValues.phonenumber ? "" : "Phonenumber is required";
     setErrors({ ...temp });
     // use every() method to check if all requred fields are filled
@@ -48,16 +42,29 @@ const Form = () => {
     setColorPicker(!colorPicker);
   };
 
+  const handleColorPicker = (e) => {
+    setFormValues({
+      ...formValues,
+      color: `rgba(${e.r}, ${e.g}, ${e.b}, ${e.a})`,
+    });
+  };
+
+  const handleDateChange = (e) => {
+    setFormValues({
+      ...formValues,
+      birthdate: e,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) {
       return console.log("Form contains invalid fields");
     }
-    setFormValues({ ...formValues, color: selectedColor });
     dispatch(createUser(formValues));
     setSuccessSubmition(true);
-    return <div>User created</div>;
   };
+
   const clear = (e) => {
     e.preventDefault();
   };
@@ -74,13 +81,7 @@ const Form = () => {
 
       <FormWrapper in={!succesSubmition}>
         <div className="user-icon">
-          <div
-            className="icon"
-            style={{
-              backgroundColor: `rgba(${selectedColor.r}, ${selectedColor.g}, ${selectedColor.b}, ${selectedColor.a}
-              )`,
-            }}
-          >
+          <div className="icon" style={{ backgroundColor: formValues.color }}>
             <h1>
               {formValues.firstname[0]} {formValues.lastname[0]}
             </h1>
@@ -121,20 +122,14 @@ const Form = () => {
             <div className="color-picker-title">
               <h3>Color:</h3>
               <button
-                style={{
-                  backgroundColor: `rgba(${selectedColor.r}, ${selectedColor.g}, ${selectedColor.b}, ${selectedColor.a}
-                  )`,
-                }}
+                style={{ backgroundColor: formValues.color }}
                 className="color-picker-toggle"
                 onClick={handleColorToggle}
               ></button>
             </div>
             <div className="color-picker">
               <Collapse in={colorPicker} style={{ position: "absolute" }}>
-                <ColorPicker
-                  selectedColor={selectedColor}
-                  setSelectedColor={setSelectedColor}
-                />
+                <ColorPicker handleColorPicker={handleColorPicker} />
               </Collapse>
             </div>
           </div>
@@ -152,19 +147,15 @@ const Form = () => {
               }
             />
           </div>
+
           <div className="form-row-5">
-            <TextField
-              name="birthdate"
-              variant="outlined"
-              label="Birth Date"
-              fullWidth
+            <DateSelector
               style={{ margin: "20px" }}
-              value={formValues.birthdate}
-              error={errors.birthdate}
-              helperText={errors.birthdate}
-              onChange={(e) =>
-                setFormValues({ ...formValues, birthdate: e.target.value })
-              }
+              formValues={formValues}
+              errors={errors}
+              handleDateChange={handleDateChange}
+              minDate={-100}
+              maxDate={-10}
             />
           </div>
           <div className="form-row-6">

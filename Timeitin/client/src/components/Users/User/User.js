@@ -40,7 +40,10 @@ const User = ({ user, header = false }) => {
       <div className="user-col-6">
         {header ? "Color" : ""}
         <div
-          style={{ display: header ? "none" : "", backgroundColor: user.color }}
+          style={{
+            display: header ? "none" : "",
+            backgroundColor: user.color,
+          }}
           className="user-color"
         ></div>
       </div>
