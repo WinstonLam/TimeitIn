@@ -38,6 +38,17 @@ export const fetchUsers = () => {
   };
 };
 
+export const deleteUser = (userId) => {
+  return async function (dispacth) {
+    try {
+      await api.deleteUser(userId);
+      dispacth({ type: types.DELETE_USER, payload: userId });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 // export const fetchUser = (userId) => {
 //   return async function (dispatch) {
 //     const response = await users.get(`/users/${userId}`);

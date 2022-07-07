@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import Users from "./Users/Users";
+import Users from "./Users";
 import Form from "./Form";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import history from "./history";

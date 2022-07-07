@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import CreateUser from "../models/createUser.js";
 
 export const getUsers = async (req, res) => {
@@ -18,5 +19,19 @@ export const createUser = async (req, res) => {
     res.status(201).json(newUser);
   } catch (error) {
     res.status(409).json({ message: error.message });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  const userId = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(userId))
+    return res.status(404).json({ message: "User not found" });
+
+  try {
+    await CreateUser.findByIdAndDelete(userId);
+    res.status(200).json({ message: "User deleted" });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };

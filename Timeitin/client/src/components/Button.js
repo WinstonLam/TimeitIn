@@ -9,6 +9,8 @@ const Button = ({
   bdColor = "none",
   link,
   onClick,
+  height = "50px",
+  width = "150px",
 }) => {
   if (link) {
     return (
@@ -20,6 +22,8 @@ const Button = ({
           color: textColor,
           background: bgColor,
           borderColor: bdColor,
+          height: height,
+          width: width,
         }}
       >
         {text}
@@ -34,6 +38,8 @@ const Button = ({
           color: textColor,
           background: bgColor,
           borderColor: bdColor,
+          height: height,
+          width: width,
         }}
       >
         {text}

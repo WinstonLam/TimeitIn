@@ -15,7 +15,7 @@ const usersReducer = (state = [], action) => {
       return action.payload;
 
     case types.DELETE_USER:
-      return state; //(({ [action.payload]: deleted, ...newState }) => newState)(state);
+      return (({ [action.payload]: deleted, ...newState }) => newState)(state);
     default:
       return state;
   }
