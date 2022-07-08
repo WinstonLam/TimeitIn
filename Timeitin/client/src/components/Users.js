@@ -19,6 +19,7 @@ const Users = () => {
     if (isMounted) {
       dispatch(fetchUsers());
     }
+
     return () => {
       isMounted = false;
     };
@@ -36,12 +37,10 @@ const Users = () => {
     }
   };
 
-  const handleDelete = () => {
-    selectedUsers.forEach((user) => {
-      console.log(user.id);
+  const handleDelete = async () => {
+    selectedUsers.map((user) => {
       dispatch(deleteUser(user.id));
     });
-    dispatch(fetchUsers());
   };
 
   // dispatch(deleteUser(userId));
@@ -63,7 +62,7 @@ const Users = () => {
           <div className="selections">
             {selectedUsers.length > 0 ? (
               <>
-                <p>Selected users: {selectedUsers.length}</p>
+                Selected users: {selectedUsers.length}
                 <div
                   className="user-icons"
                   style={{ display: "flex", height: "100%" }}

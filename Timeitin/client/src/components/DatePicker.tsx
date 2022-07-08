@@ -3,6 +3,8 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TextField } from "@mui/material";
+import { UserCreationFormProps, UserCreationFormErros, DatePickerProps } from "./interfaces";
+
 
 const DateSelector = ({
   formValues,
@@ -10,7 +12,7 @@ const DateSelector = ({
   handleDateChange,
   minDate,
   maxDate,
-}) => {
+}: DatePickerProps) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DesktopDatePicker
@@ -26,7 +28,7 @@ const DateSelector = ({
           <TextField
             style={{ width: "100%", margin: "20px" }}
             {...params}
-            error={errors.birthdate}
+            error={errors.birthdate ? false : true}
             helperText={errors.birthdate}
           />
         )}

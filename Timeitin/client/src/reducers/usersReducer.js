@@ -15,7 +15,7 @@ const usersReducer = (state = [], action) => {
       return action.payload;
 
     case types.DELETE_USER:
-      return (({ [action.payload]: deleted, ...newState }) => newState)(state);
+      return state.filter((user) => user._id !== action.payload);
     default:
       return state;
   }

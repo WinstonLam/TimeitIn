@@ -7,7 +7,7 @@ import history from "./history";
 
 function App() {
   return (
-    <>
+    <div className="App">
       <BrowserRouter location={history.location} navigator={history}>
         <Header />
 
@@ -16,7 +16,7 @@ function App() {
           <Route path="/users/new" element={<Form />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

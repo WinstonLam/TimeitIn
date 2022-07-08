@@ -5,7 +5,7 @@ import { createUser } from "../actions";
 import ColorPicker from "./ColorPicker";
 import DateSelector from "./DatePicker";
 import { TextField, Alert, AlertTitle, Collapse } from "@mui/material";
-import Button from "../components/Button";
+import Button from "./Button";
 
 import "./Styles/Form.css";
 import "./Styles/Form.js";
@@ -20,7 +20,6 @@ const Form = () => {
     phonenumber: "",
   });
   const [errors, setErrors] = useState({});
-
   const [succesSubmition, setSuccessSubmition] = useState(false);
   const [colorPicker, setColorPicker] = useState(false);
   const dispatch = useDispatch();
@@ -150,7 +149,6 @@ const Form = () => {
 
           <div className="form-row-5">
             <DateSelector
-              style={{ margin: "20px" }}
               formValues={formValues}
               errors={errors}
               handleDateChange={handleDateChange}

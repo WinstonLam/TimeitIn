@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Styles/Button.css";
+import { ButtonProps } from "./interfaces";
 
 const Button = ({
   text,
@@ -11,7 +12,7 @@ const Button = ({
   onClick,
   height = "50px",
   width = "150px",
-}) => {
+}: ButtonProps) => {
   if (link) {
     return (
       <Link

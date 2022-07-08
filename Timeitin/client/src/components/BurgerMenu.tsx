@@ -3,15 +3,15 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
+import { BasicArrays } from "./interfaces";
 
-const BurgerMenu = ({ pages, links }) => {
+const BurgerMenu = ({ pages, links }: BasicArrays) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [rotateBurger, setRotateBurger] = useState(false);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: any) => {
     setRotateBurger(!rotateBurger);
     setAnchorElNav(event.currentTarget);
   };
@@ -56,15 +56,18 @@ const BurgerMenu = ({ pages, links }) => {
       >
         {pages.map((page, idx) => (
           <MenuItem
+            key={idx}
             component={Link}
             to={links[idx]}
-            key={page}
             onClick={handleCloseNavMenu}
           >
-            <Typography textAlign="center"> {page}</Typography>
+            {page}
+
           </MenuItem>
+
         ))}
       </Menu>
+
     </Box>
   );
 };
