@@ -23,13 +23,13 @@ export const createUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  const userId = req.params;
+  const { id: _id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(userId))
+  if (!mongoose.Types.ObjectId.isValid(_id))
     return res.status(404).json({ message: "User not found" });
 
   try {
-    await CreateUser.findByIdAndDelete(userId);
+    await CreateUser.findByIdAndDelete(_id);
     res.status(200).json({ message: "User deleted" });
   } catch (error) {
     res.status(404).json({ message: error.message });

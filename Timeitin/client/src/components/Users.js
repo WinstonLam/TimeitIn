@@ -25,16 +25,23 @@ const Users = () => {
   }, [dispatch]);
 
   const handleSelectionModelChange = (ids) => {
-    const selectedIDs = new Set(ids);
-    const selectedRowData = rows.filter((row) =>
-      selectedIDs.has(row.id.toString())
-    );
-
-    setSelectedUsers(selectedRowData);
+    if (ids.length > 0) {
+      const selectedIDs = new Set(ids);
+      const selectedRowData = rows.filter((row) =>
+        selectedIDs.has(row.id.toString())
+      );
+      setSelectedUsers(selectedRowData);
+    } else {
+      setSelectedUsers([]);
+    }
   };
 
-  const handleDelete = (users) => {
-    users.map((user) => dispatch(deleteUser(user.id)));
+  const handleDelete = () => {
+    selectedUsers.forEach((user) => {
+      console.log(user.id);
+      dispatch(deleteUser(user.id));
+    });
+    dispatch(fetchUsers());
   };
 
   // dispatch(deleteUser(userId));
@@ -47,7 +54,7 @@ const Users = () => {
             <Button link="/users/new" text="Create User"></Button>
             {selectedUsers.length > 0 ? (
               <Button
-                onClick={handleDelete(selectedUsers)}
+                onClick={handleDelete}
                 text="Delete User(s)"
                 bgColor="red"
               ></Button>

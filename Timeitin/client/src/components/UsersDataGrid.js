@@ -55,15 +55,20 @@ export const renderColumns = (params) => {
   ];
 };
 
-export const renderUsers = (users) =>
-  users.map((user) => {
-    return {
-      id: user._id,
-      usericon: user.color,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      phonenumber: user.phonenumber,
-      birthdate: user.birthdate,
-      pincode: user.pincode,
-    };
-  });
+export const renderUsers = (users) => {
+  if (users.length > 0) {
+    return users.map((user) => {
+      return {
+        id: user._id,
+        usericon: user.color,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        phonenumber: user.phonenumber,
+        birthdate: user.birthdate,
+        pincode: user.pincode,
+      };
+    });
+  } else {
+    return {};
+  }
+};
