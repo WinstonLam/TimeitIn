@@ -1,5 +1,7 @@
 import * as types from "./actionTypes";
 import * as api from "../api/index.js";
+import {Dispatch} from "redux";
+import { UserCreationFormProps } from "../components/interfaces";
 // import history from "../";
 
 // export const signIn = (userId) => {
@@ -15,8 +17,8 @@ import * as api from "../api/index.js";
 //   };
 // };
 
-export const createUser = (newUser) => {
-  return async function (dispatch, getState) {
+export const createUser = (newUser: UserCreationFormProps) => {
+  return async function (dispatch: Dispatch) {
     try {
       const response = await api.createUser(newUser);
       dispatch({ type: types.CREATE_USER, payload: response.data });
@@ -28,7 +30,7 @@ export const createUser = (newUser) => {
 };
 
 export const fetchUsers = () => {
-  return async function (dispatch) {
+  return async function (dispatch: Dispatch) {
     try {
       const response = await api.getUsers();
       dispatch({ type: types.FETCH_USERS, payload: response.data });
@@ -38,8 +40,8 @@ export const fetchUsers = () => {
   };
 };
 
-export const deleteUser = (userId) => {
-  return async function (dispacth) {
+export const deleteUser = (userId: number) => {
+  return async function (dispacth: Dispatch) {
     try {
       await api.deleteUser(userId);
       dispacth({ type: types.DELETE_USER, payload: userId });

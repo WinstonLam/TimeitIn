@@ -3,8 +3,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TextField } from "@mui/material";
-import { UserCreationFormProps, UserCreationFormErros, DatePickerProps } from "./interfaces";
-
+import { DatePickerProps } from "./interfaces";
 
 const DateSelector = ({
   formValues,

@@ -62,12 +62,9 @@ const BurgerMenu = ({ pages, links }: BasicArrays) => {
             onClick={handleCloseNavMenu}
           >
             {page}
-
           </MenuItem>
-
         ))}
       </Menu>
-
     </Box>
   );
 };

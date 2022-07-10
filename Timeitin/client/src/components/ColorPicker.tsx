@@ -1,13 +1,11 @@
 import React from "react";
-
 import { RgbaColorPicker } from "react-colorful";
+import { ColorPickerProps } from "./interfaces";
 
-interface ColorPickerProps {
-  selectedColor: { r: number; g: number; b: number; a: number };
-  handleColorPicker: (e: any) => void;
-}
-
-const ColorPicker = ({ selectedColor, handleColorPicker }: ColorPickerProps) => {
+const ColorPicker = ({
+  selectedColor,
+  handleColorPicker,
+}: ColorPickerProps) => {
   return (
     <RgbaColorPicker
       color={selectedColor}
