@@ -1,8 +1,10 @@
 // This file is to find misspell bugs more easily
-export const SIGN_IN = "SIGN_IN";
-export const SIGN_OUT = "SIGN_OUT";
-export const CREATE_USER = "CREATE_USER";
-export const FETCH_USERS = "FETCH_USERS";
-export const FETCH_USER = "FETCH_USER";
-export const EDIT_USER = "EDIT_USER";
-export const DELETE_USER = "DELETE_USER";
+export enum ActionTypes {
+  SIGN_IN = "SIGN_IN",
+  SIGN_OUT = "SIGN_OUT",
+  CREATE_USER = "CREATE_USER",
+  FETCH_USERS = "FETCH_USERS",
+  FETCH_USER = "FETCH_USER",
+  EDIT_USER = "EDIT_USER",
+  DELETE_USER = "DELETE_USER",
+}

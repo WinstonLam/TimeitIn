@@ -2,11 +2,15 @@ import React from "react";
 import Button from "./Button";
 import "./Styles/Users.css";
 
+const userColor = (usericon) => {
+  return `rgba(${usericon.r}, ${usericon.g}, ${usericon.b}, ${usericon.a})`;
+};
+
 const userIcon = (params) => {
   return (
     <div
       className="user-icon-small"
-      style={{ backgroundColor: params.row.usericon, width: "80%" }}
+      style={{ backgroundColor: userColor(params.row.usericon), width: "80%" }}
     >
       <h2>{params.row.firstname[0]}</h2>
       <h2>{params.row.lastname[0]}</h2>

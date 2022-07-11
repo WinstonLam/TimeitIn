@@ -43,7 +43,9 @@ const Users = () => {
     });
   };
 
-  // dispatch(deleteUser(userId));
+  const userColor = (user) => {
+    return `rgba(${user.usericon.r}, ${user.usericon.g}, ${user.usericon.b}, ${user.usericon.a})`;
+  };
 
   return (
     <div className="container">
@@ -73,7 +75,7 @@ const Users = () => {
                         key={user.id}
                         className="user-icon-small"
                         style={{
-                          backgroundColor: user.usericon,
+                          backgroundColor: userColor(user),
                           width: "13%",
                           height: "40%",
                           margin: "0.5%",

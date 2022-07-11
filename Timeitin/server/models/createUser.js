@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const userSchema = mongoose.Schema({
   firstname: String,
   lastname: String,
-  color: String,
+  color: { r: Number, g: Number, b: Number, a: Number },
   pincode: String,
-  birthdate: String,
+  birthdate: Date,
   phonenumber: String,
   createdAt: { type: Date, default: Date.now },
 });

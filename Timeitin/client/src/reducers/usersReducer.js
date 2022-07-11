@@ -1,4 +1,4 @@
-import * as types from "../actions/actionTypes";
+import { ActionTypes as types } from "../actions/actionTypes";
 
 const usersReducer = (state = [], action) => {
   switch (action.type) {

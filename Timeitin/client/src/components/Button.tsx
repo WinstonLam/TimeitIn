@@ -12,10 +12,12 @@ const Button = ({
   onClick,
   height = "50px",
   width = "150px",
+  type,
 }: ButtonProps) => {
   if (link) {
     return (
       <Link
+        type={type}
         to={link}
         className="button"
         onClick={onClick}
@@ -33,6 +35,7 @@ const Button = ({
   } else {
     return (
       <button
+        type={type}
         className="button"
         onClick={onClick}
         style={{

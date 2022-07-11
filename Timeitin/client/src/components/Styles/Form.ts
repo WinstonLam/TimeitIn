@@ -5,6 +5,7 @@ export const FormWrapper = styled(Collapse)({
   height: "600px",
   width: "75%",
   minWidth: " 650px",
+  maxWidth: "1000px",
   borderRadius: " 2rem",
   boxShadow: "-7px 15px 21px 8px rgba(196,174,143,0.84)",
   webkitBoxShadow: "-7px 15px 21px 8px rgba(196,174,143,0.84)",
