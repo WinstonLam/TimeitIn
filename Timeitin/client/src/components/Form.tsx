@@ -8,7 +8,7 @@ import ColorPicker from "./ColorPicker";
 import DateSelector from "./DatePicker";
 import { FormControl, TextField, Alert, AlertTitle, Collapse, Paper } from "@mui/material";
 import Button from "./Button";
-import Modal from "./Modal";
+import UserCreationModal from "./UserCreationModal";
 
 import { ColorPickerProps, } from "../components/interfaces";
 
@@ -90,29 +90,9 @@ const Form = () => {
 
   return (
     <div className="container">
-      <Collapse in={succesSubmition}>
+  
+        <UserCreationModal succesSubmition={succesSubmition} setSuccessSubmition={setSuccessSubmition} clear={clear}/>
 
-        <Modal handleClose={setSuccessSubmition} show={succesSubmition} content={<>some Shit</>} />
-        {/* <div className="succes-creation">
-          <Alert style={{ borderRadius: "2rem" }} severity="success">
-            <AlertTitle>
-              <strong>User has succesfully been created</strong>
-            </AlertTitle>
-          </Alert>
-          <div className="button-container">
-            <Button
-              text="Create another user"
-
-              onClick={() => {
-                setSuccessSubmition(!succesSubmition)
-                clear()
-              }} />
-            <Button text="Undo" bgColor="red" onClick={clear} />
-            <Button text="Overview" bgColor="green" link="/users" />
-          </div>
-        </div> */}
-
-      </Collapse>
 
 
       <FormWrapper in={!succesSubmition}>

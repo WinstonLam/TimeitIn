@@ -2,7 +2,7 @@ import { Collapse } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const FormWrapper = styled(Collapse)({
-  height: "600px",
+  maxHeight: "500px !important",
   width: "75%",
   minWidth: " 650px",
   maxWidth: "1000px",

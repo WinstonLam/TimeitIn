@@ -4,22 +4,17 @@ import "./Styles/Modal.css";
 import { Collapse, Alert, AlertTitle } from "@mui/material";
 import useMountTransition from "./useMountTransition";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import { CommentsDisabledOutlined } from "@mui/icons-material";
 
 const Modal = ({ content, show, handleClose }: any) => {
-    const hasTransitionedIn = useMountTransition(true, 1000);
+    const hasTransitionedIn = useMountTransition(show, 100);
 
-    const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        // event.preventDefault();
-        // handleClose();
-
-    }
     return ReactDom.createPortal(
-
-        <div className="modal">
+        <>
             {hasTransitionedIn && (
-                <>
+                <div className="modal">
                     <div className="closing-button">
-                        <button onClick={handleOnClick}><AddCircleRoundedIcon fontSize="large" /></button>
+                        <button onClick={handleClose}><AddCircleRoundedIcon fontSize="large" /></button>
                     </div>
                     <div className="modal-content">
                         <Alert style={{ borderRadius: "2rem" }} severity="success">
@@ -33,10 +28,12 @@ const Modal = ({ content, show, handleClose }: any) => {
 
 
                     </div>
-                </>
+                    </div>
+              
+
             )}
 
-        </div>
+            </>
         ,
 
         document.getElementById('modal')

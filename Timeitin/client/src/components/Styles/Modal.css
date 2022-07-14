@@ -17,32 +17,32 @@
     border-radius: 3rem;
     background-color: white;
     opacity: 0% ;
-    animation: modalFadeIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-    box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
-    -webkit-box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
-    -moz-box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
+    animation: modalFadeIn .5s .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
     z-index: 100;
+    box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
 }
 
 .modal>* {
 
   opacity: 0% ;
 
-  animation: modalContentFadeIn .5s 1s forwards;
+  animation: modalContentFadeIn .5s .5s forwards;
 }
 
 .modal-content {
   padding: 10%;
-  margin-top: 5%;
   position: relative;
 }
 
 .closing-button{
     display: flex;
     justify-content: end;
-    width: 88%;
+    width: 97%;
     position: absolute;
-    margin-top: 5%;
+    margin-top: 4%;
+    z-index: 5;
 }
 
 .closing-button button{
@@ -64,8 +64,14 @@
 @keyframes modalFadeIn {
     0% {
       opacity: 0;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
     }
     100% {
+      box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
+      -webkit-box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
+      -moz-box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
       opacity: 1;
     }
   }
