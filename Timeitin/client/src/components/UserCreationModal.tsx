@@ -2,7 +2,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import Button from './Button';
 import Modal from './Modal';
-import history from './history';
+import { useNavigate } from 'react-router-dom';
 
 interface UserCreationModalProps {
     succesSubmition: boolean;
@@ -12,21 +12,22 @@ interface UserCreationModalProps {
 
 
 const content = (handleClose: () => void) => {
-    return(
-        <div className="button-container" style={{display: "flex"}}>
-        <Button
-        text="Create new user"
-        width="250px"
-        onClick={
-            handleClose
-        } />
-      
-        <Button text="Overview" bgColor="grey" width="250px" link="/users" />
-    </div>
+    return (
+        <div className="button-container" style={{ display: "flex" }}>
+            <Button
+                text="Create new user"
+                width="250px"
+                onClick={
+                    handleClose
+                } />
+
+            <Button text="Overview" bgColor="grey" width="250px" link="/users" />
+        </div>
     )
 }
 
-const UserCreationModal: FunctionComponent<UserCreationModalProps> = ({ clear ,succesSubmition, setSuccessSubmition}) => {
+const UserCreationModal: FunctionComponent<UserCreationModalProps> = ({ clear, succesSubmition, setSuccessSubmition }) => {
+    let navigate = useNavigate();
     const [showModal, setShowModal] = useState(succesSubmition);
 
     const handleReset = () => {
@@ -38,11 +39,17 @@ const UserCreationModal: FunctionComponent<UserCreationModalProps> = ({ clear ,s
     const handleClose = () => {
         console.log("handleClose");
         setShowModal(!showModal);
-        history.push("/users");
+        console.log(showModal)
+        navigate("/users");
     }
 
     return (
-        <Modal show={showModal} handleClose={handleClose} content={content(handleReset)}>  </Modal>
+        <Modal
+            alert={true}
+            alertMessage="User has succesfully been created"
+            alertType="success"
+            show={succesSubmition} handleClose={handleClose}
+            content={content(handleReset)} />
     );
 }
 

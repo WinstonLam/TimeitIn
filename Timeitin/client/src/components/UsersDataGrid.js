@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Button";
+
 import "./Styles/Users.css";
 
 const userColor = (usericon) => {
@@ -18,16 +19,24 @@ const userIcon = (params) => {
   );
 };
 
-const userButtons = (params) => {
+const userButtons = (params, setUserDeletionId, setShowConfirmationModal) => {
   return (
     <>
       <Button height="80%" text="Edit User"></Button>
-      <Button height="80%" text="Delete User" bgColor="red"></Button>
+      <Button
+        height="80%"
+        text="Delete User"
+        bgColor="red"
+        onClick={() => {
+          setUserDeletionId(params.row.id);
+          setShowConfirmationModal(true);
+        }}
+      ></Button>
     </>
   );
 };
 
-export const renderColumns = (params) => {
+export const RenderColumns = (setShowConfirmationModal, setUserDeletionId) => {
   return [
     { field: "id", headerName: "", width: 100, hide: true },
     {
@@ -53,13 +62,13 @@ export const renderColumns = (params) => {
       headerName: "",
       width: 300,
       renderCell: (params) => {
-        return userButtons(params);
+        return userButtons(params, setUserDeletionId, setShowConfirmationModal);
       },
     },
   ];
 };
 
-export const renderUsers = (users) => {
+export const RenderUsers = (users) => {
   if (users.length > 0) {
     return users.map((user) => {
       return {

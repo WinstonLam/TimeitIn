@@ -3,10 +3,9 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormWrapper } from "./Styles/Form";
 import * as actions from "../actions";
-
 import ColorPicker from "./ColorPicker";
 import DateSelector from "./DatePicker";
-import { FormControl, TextField, Alert, AlertTitle, Collapse, Paper } from "@mui/material";
+import { FormControl, TextField, Collapse, } from "@mui/material";
 import Button from "./Button";
 import UserCreationModal from "./UserCreationModal";
 
@@ -90,8 +89,8 @@ const Form = () => {
 
   return (
     <div className="container">
-  
-        <UserCreationModal succesSubmition={succesSubmition} setSuccessSubmition={setSuccessSubmition} clear={clear}/>
+
+      <UserCreationModal succesSubmition={succesSubmition} setSuccessSubmition={setSuccessSubmition} clear={clear} />
 
 
 

@@ -3,12 +3,11 @@ import Header from "./Header";
 import Users from "./Users";
 import Form from "./Form";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import history from "./history";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter location={history.location} navigator={history}>
+      <BrowserRouter>
         <Header />
 
         <Routes>

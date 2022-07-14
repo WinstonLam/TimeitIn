@@ -1,12 +1,20 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import ReactDom from "react-dom";
 import "./Styles/Modal.css";
-import { Collapse, Alert, AlertTitle } from "@mui/material";
+import { Alert, AlertTitle } from "@mui/material";
 import useMountTransition from "./useMountTransition";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import { CommentsDisabledOutlined } from "@mui/icons-material";
 
-const Modal = ({ content, show, handleClose }: any) => {
+interface ModalProps {
+    show: boolean;
+    handleClose: () => void;
+    content?: any;
+    alert?: boolean;
+    alertMessage?: string;
+    alertType?: "success" | "error" | "warning" | "info";
+}
+
+const Modal: FunctionComponent<ModalProps> = ({ content, show, handleClose, alert, alertType, alertMessage }) => {
     const hasTransitionedIn = useMountTransition(show, 100);
 
     return ReactDom.createPortal(
@@ -17,25 +25,18 @@ const Modal = ({ content, show, handleClose }: any) => {
                         <button onClick={handleClose}><AddCircleRoundedIcon fontSize="large" /></button>
                     </div>
                     <div className="modal-content">
-                        <Alert style={{ borderRadius: "2rem" }} severity="success">
+                        {alert && (<Alert style={{ borderRadius: "2rem" }} severity={alertType}>
                             <AlertTitle>
-                                <strong>User has succesfully been created</strong>
+                                <strong>{alertMessage}</strong>
                             </AlertTitle>
-                        </Alert>
-
+                        </Alert>)}
 
                         {content}
-
-
                     </div>
-                    </div>
-              
-
+                </div>
             )}
-
-            </>
+        </>
         ,
-
         document.getElementById('modal')
     );
 }
