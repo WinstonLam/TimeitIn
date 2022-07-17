@@ -1,32 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormWrapper } from "./Styles/Form";
 import * as actions from "../actions";
 import ColorPicker from "./ColorPicker";
 import DateSelector from "./DatePicker";
-import { FormControl, TextField, Collapse, } from "@mui/material";
+import { FormControl, TextField, Collapse } from "@mui/material";
 import Button from "./Button";
 import UserCreationModal from "./UserCreationModal";
 
-import { ColorPickerProps, } from "../components/interfaces";
+import { ColorPickerProps } from "../components/interfaces";
 
 import "./Styles/Form.css";
 import "./Styles/Form.ts";
 
 const Form = () => {
+  const userId = useParams();
+  // const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
-  const { createUser } = bindActionCreators(actions, dispatch)
+  const { createUser, fetchUsers } = bindActionCreators(actions, dispatch);
   const [succesSubmition, setSuccessSubmition] = useState(false);
   const [colorPicker, setColorPicker] = useState(false);
   const [formValues, setFormValues] = useState<{
-    firstname: null | string,
-    lastname: null | string,
-    color: ColorPickerProps["selectedColor"],
-    pincode: null | string,
-    birthdate: null | Date,
-    phonenumber: null | string,
-  }>({ firstname: "", lastname: "", color: { r: 84, g: 187, b: 255, a: 0.9 }, pincode: "", birthdate: new Date(""), phonenumber: "" });
+    firstname: null | string;
+    lastname: null | string;
+    color: ColorPickerProps["selectedColor"];
+    pincode: null | string;
+    birthdate: null | Date;
+    phonenumber: null | string;
+  }>({
+    firstname: "",
+    lastname: "",
+    color: { r: 84, g: 187, b: 255, a: 0.9 },
+    pincode: "",
+    birthdate: new Date(""),
+    phonenumber: "",
+  });
   const [errors, setErrors] = useState({
     firstname: "",
     lastname: "",
@@ -35,21 +45,27 @@ const Form = () => {
     phonenumber: "",
   });
 
+  // useEffect(() => dispatch(fetchUsers()), [dispatch]);
+
   const validate = () => {
-    const date = formValues.birthdate.getDate()
+    const date = formValues.birthdate.getDate();
 
     const firstnameError = formValues.firstname ? "" : "Firstname is required";
     const lastnameError = formValues.lastname ? "" : "Lastname is required";
     const pincodeError = formValues.pincode ? "" : "Pincode is required";
     const birthdateError = date ? "" : "Birthdate is required";
-    const phonenumberError = formValues.phonenumber ? "" : "Phonenumber is required";
+    const phonenumberError = formValues.phonenumber
+      ? ""
+      : "Phonenumber is required";
 
     setErrors({
-      ...errors, firstname: firstnameError, lastname: lastnameError,
-      pincode: pincodeError, birthdate: birthdateError, phonenumber: phonenumberError
+      ...errors,
+      firstname: firstnameError,
+      lastname: lastnameError,
+      pincode: pincodeError,
+      birthdate: birthdateError,
+      phonenumber: phonenumberError,
     });
-
-
     return Object.values(formValues).every((field) => field !== null) && date;
   };
 
@@ -82,17 +98,25 @@ const Form = () => {
   };
 
   const clear = () => {
-    setFormValues({ firstname: "", lastname: "", color: { r: 84, g: 187, b: 255, a: 0.9 }, pincode: "", birthdate: null, phonenumber: "", });
+    setFormValues({
+      firstname: "",
+      lastname: "",
+      color: { r: 84, g: 187, b: 255, a: 0.9 },
+      pincode: "",
+      birthdate: null,
+      phonenumber: "",
+    });
   };
 
   const translatedColor = `rgba(${formValues.color.r}, ${formValues.color.g}, ${formValues.color.b}, ${formValues.color.a})`;
 
   return (
     <div className="container">
-
-      <UserCreationModal succesSubmition={succesSubmition} setSuccessSubmition={setSuccessSubmition} clear={clear} />
-
-
+      <UserCreationModal
+        succesSubmition={succesSubmition}
+        setSuccessSubmition={setSuccessSubmition}
+        clear={clear}
+      />
 
       <FormWrapper in={!succesSubmition}>
         <FormControl>
@@ -107,7 +131,6 @@ const Form = () => {
           <form autoComplete="off" onSubmit={handleSubmit}>
             <div className="form-row-1">
               <TextField
-
                 name="firstName"
                 variant="outlined"
                 label="First Name"

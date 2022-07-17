@@ -24,7 +24,10 @@ const BurgerMenu = ({ pages, links }: BasicArrays) => {
   const rotate = rotateBurger ? "rotate(90deg)" : "rotate(0)";
 
   return (
-    <Box sx={{ display: { xs: "flex", md: "none" } }}>
+    <Box
+      style={{ justifyContent: "right" }}
+      sx={{ display: { xs: "flex", md: "none" } }}
+    >
       <IconButton
         size="large"
         aria-label="account of current user"

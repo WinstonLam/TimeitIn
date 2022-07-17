@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { selectUsers } from "../redux/strore";
+import { useAppDispatch } from "../redux/hooks";
 import { fetchUsers, deleteUser } from "../actions";
-import Button from "./Button";
+import Button from "././Button";
 import { RenderColumns, RenderUsers } from "./UsersDataGrid";
 import ConfirmationModal from "./ConfirmationModal";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridSelectionModel, GridColDef } from "@mui/x-data-grid";
 import "./Styles/Users.css";
 
 const Users = () => {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
+  const dispatch = useAppDispatch();
+  const users = useSelector(selectUsers);
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [userDeletionId, setUserDeletionId] = useState("");
+  const [userRowId, setUserRowId] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const columns = RenderColumns(setShowConfirmationModal, setUserDeletionId);
+  const columns: GridColDef[] = RenderColumns(
+    setShowConfirmationModal,
+    setUserRowId
+  );
   const rows = RenderUsers(users);
 
   useEffect(() => {
-    let isMounted = true;
-    if (isMounted) dispatch(fetchUsers());
-    return () => (isMounted = false);
+    dispatch(fetchUsers());
   }, [dispatch]);
 
-  const handleSelectionModelChange = (ids) => {
+  const handleSelectionModelChange = (ids: GridSelectionModel) => {
     if (ids.length > 0) {
       const selectedIDs = new Set(ids);
       const selectedRowData = rows.filter((row) =>
@@ -40,7 +42,7 @@ const Users = () => {
       dispatch(deleteUser(user.id));
     });
     {
-      userDeletionId && dispatch(deleteUser(userDeletionId));
+      userRowId && dispatch(deleteUser(userRowId));
     }
   };
 
@@ -63,7 +65,7 @@ const Users = () => {
     });
   };
 
-  const userColor = (user) => {
+  const userColor = (user: any) => {
     return `rgba(${user.usericon.r}, ${user.usericon.g}, ${user.usericon.b}, ${user.usericon.a})`;
   };
 
@@ -72,7 +74,7 @@ const Users = () => {
       <ConfirmationModal
         isOpen={showConfirmationModal}
         onConfirm={handleDelete}
-        onCancel="/users"
+        onCancel={setShowConfirmationModal}
       />
       <div className="container">
         <div className="wrapper">
@@ -81,7 +83,7 @@ const Users = () => {
               <Button link="/users/new" text="Create User"></Button>
               {selectedUsers.length > 0 && (
                 <Button
-                  onClick={handleDelete}
+                  onClick={() => setShowConfirmationModal(true)}
                   text="Delete User(s)"
                   bgColor="red"
                 ></Button>
@@ -108,7 +110,7 @@ const Users = () => {
           </div>
           <DataGrid
             columns={columns}
-            rows={users.length > 0 ? rows : []}
+            rows={users ? rows : []}
             pageSize={5}
             rowsPerPageOptions={[5]}
             checkboxSelection

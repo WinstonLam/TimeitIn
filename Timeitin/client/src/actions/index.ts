@@ -1,8 +1,10 @@
 import { ActionTypes as types } from "./actionTypes";
 import { Action } from "../components/interfaces";
 import * as api from "../api";
-import { Dispatch } from "redux";
+import { AnyAction, Dispatch } from "redux";
 import { UserCreationFormProps } from "../components/interfaces";
+
+type ActionType = (dispatch: Dispatch<Action>) => Promise<void>;
 // import history from "../";
 
 // export const signIn = (userId) => {
@@ -42,7 +44,7 @@ export const fetchUsers = () => {
   };
 };
 
-export const deleteUser = (userId: number) => {
+export const deleteUser= (userId: string) => {
   return async function (dispacth: Dispatch<Action>) {
     try {
       await api.deleteUser(userId);

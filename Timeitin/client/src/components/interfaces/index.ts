@@ -1,5 +1,6 @@
 import { RgbaColor } from "react-colorful";
 import { ActionTypes as types } from "../../actions/actionTypes";
+import { GridColDef } from "@mui/x-data-grid";
 export interface BasicArrays {
   pages: Array<string>;
   links: Array<string>;
@@ -11,7 +12,7 @@ export interface ButtonProps {
   bgColor?: string;
   bdColor?: string;
   link?: string;
-  onClick?: (e: any) => void;
+  onClick?: (e: any | null) => void;
   width?: string;
   height?: string;
   type?: "button" | "submit" | "reset";
@@ -34,6 +35,14 @@ export interface UserCreationFormErros {
   phonenumber: string;
 }
 
+export interface UserDataGridProps {
+  usericon?: RgbaColor,
+  params?: any,
+  setUserRowId?: (id: string) => void,
+  setShowConfirmationModal?: (show: boolean) => void,
+  users?: Array<any>
+  RenderColumns?: (setShowConfirmationModal: (show: boolean) => void, setUserRowId: (id: string) => void) => GridColDef[],
+}
 export interface DatePickerProps {
   birthdate: Date | null;
   errors: UserCreationFormErros;
@@ -72,7 +81,7 @@ interface FetchUsersAction {
 }
 interface DeleteUserAction {
   type: types.DELETE_USER;
-  payload: number;
+  payload: string;
 }
 interface UpdateUserAction {
   type: types.EDIT_USER;
@@ -87,3 +96,5 @@ export type Action =
   | FetchUsersAction
   | DeleteUserAction
   | UpdateUserAction;
+
+

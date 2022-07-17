@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import Button from './Button';
 import Modal from './Modal';
 
@@ -6,13 +6,18 @@ import Modal from './Modal';
 interface ConfirmationModalProps {
     isOpen: boolean;
     onConfirm: any;
-    onCancel: string
+    onCancel: any
 }
 
 const ConfirmationModal: FunctionComponent<ConfirmationModalProps> = ({ isOpen, onConfirm, onCancel }) => {
 
     const handleClose = () => {
-        return;
+        onCancel(false);
+    }
+
+    const handleConfirm = () => {
+        onConfirm();
+        handleClose();
     }
 
     const content = () => {
@@ -21,15 +26,16 @@ const ConfirmationModal: FunctionComponent<ConfirmationModalProps> = ({ isOpen, 
                 <Button
                     text="Confirm"
                     width="250px"
-                    onClick={onConfirm} />
-                <Button text="Cancel" bgColor="grey" width="250px" link={onCancel} />
+                    onClick={handleConfirm} />
+                <Button text="Cancel" bgColor="grey" width="250px" onClick={handleClose} />
             </div>)
     }
 
     return (
         <Modal
+            overlay={true}
             alert={true}
-            alertMessage="Are you sure you want to delete this user?"
+            alertMessage="Are you sure you want to preform this action?"
             alertType="warning"
             show={isOpen}
             handleClose={handleClose}

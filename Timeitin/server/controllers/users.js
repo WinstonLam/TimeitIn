@@ -35,3 +35,18 @@ export const deleteUser = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+
+export const editUser = async (req,res) => {
+  const {id: _id} = req.params;
+
+  if(!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).json({message: "User not found"});
+
+  try{
+    const updatedUser = await CreateUser.findByIdAndUpdate(_id, req.body, {new: true});
+    res.json(updatedUser)
+  } catch(error){
+    res.status(404).json({message: error.message});
+  }
+}

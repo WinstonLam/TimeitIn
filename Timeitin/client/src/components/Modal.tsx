@@ -8,19 +8,22 @@ import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 interface ModalProps {
     show: boolean;
     handleClose: () => void;
+    overlay?: boolean;
     content?: any;
     alert?: boolean;
     alertMessage?: string;
     alertType?: "success" | "error" | "warning" | "info";
 }
 
-const Modal: FunctionComponent<ModalProps> = ({ content, show, handleClose, alert, alertType, alertMessage }) => {
-    const hasTransitionedIn = useMountTransition(show, 100);
+const Modal: FunctionComponent<ModalProps> = ({ content, show, handleClose, alert, alertType, alertMessage, overlay }) => {
+    const hasTransitionedIn = useMountTransition(show, 500);
 
     return ReactDom.createPortal(
         <>
             {hasTransitionedIn && (
-                <div className="modal">
+                <>
+                {overlay && (<div onClick={handleClose} className={show ? "overlay active" : "overlay"}></div>)}
+                <div className={show ? "modal active" : "modal"}>
                     <div className="closing-button">
                         <button onClick={handleClose}><AddCircleRoundedIcon fontSize="large" /></button>
                     </div>
@@ -34,6 +37,7 @@ const Modal: FunctionComponent<ModalProps> = ({ content, show, handleClose, aler
                         {content}
                     </div>
                 </div>
+                </>
             )}
         </>
         ,

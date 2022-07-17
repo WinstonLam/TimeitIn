@@ -32,11 +32,7 @@ const ResponsiveAppBar = () => {
             />
           </HeaderSection>
           <HeaderSection noWrap>
-            <BurgerMenu
-              links={links}
-              pages={pages}
-              style={{ justifyContent: "right" }}
-            />
+            <BurgerMenu links={links} pages={pages} />
 
             <Box
               sx={{
@@ -45,7 +41,7 @@ const ResponsiveAppBar = () => {
               style={{ justifyContent: "left" }}
             >
               {pages.map((page, idx) => (
-                <Link to={links[idx]} key={page} sx={{ color: "white" }}>
+                <Link to={links[idx]} key={page} style={{ color: "white" }}>
                   {page}
                 </Link>
               ))}
