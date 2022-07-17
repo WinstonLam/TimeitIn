@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectUsers } from "../redux/strore";
-import { useAppDispatch } from "../redux/hooks";
+import { selectUsers } from "./strore";
+import { useAppDispatch } from "./hooks";
 import { fetchUsers, deleteUser } from "../actions";
 import Button from "././Button";
 import { RenderColumns, RenderUsers } from "./UsersDataGrid";
@@ -11,7 +11,7 @@ import "./Styles/Users.css";
 
 const Users = () => {
   const dispatch = useAppDispatch();
-  const users = useSelector(selectUsers);
+  const users: any = useSelector(selectUsers);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [userRowId, setUserRowId] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);

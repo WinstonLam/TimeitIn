@@ -29,8 +29,8 @@ const DateSelector = ({
             value={birthdate}
             style={{ width: "100%", margin: "20px" }}
             {...params}
-            error={errors.birthdate ? true : false}
-            helperText={errors.birthdate}
+            error={errors.birthdateError ? true : false}
+            helperText={errors.birthdateError}
 
           />
         )}

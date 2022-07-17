@@ -5,7 +5,7 @@ import "./Styles/Header.css";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 
-import TimeitinLogo from "../images/TimeitinLogo.png";
+import TimeitinLogo from "./images/TimeitinLogo.png";
 
 const pages = ["Users", "Settings"];
 const links = ["users", "settings"];

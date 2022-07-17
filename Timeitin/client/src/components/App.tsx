@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import Users from "./Users";
-import Form from "./Form";
+import UserCreation from "./UserCreation";
+import UserUpdate from "./UserUpdate";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -12,8 +13,8 @@ function App() {
 
         <Routes>
           <Route path="/users" element={<Users />} />
-          <Route path="/users/new" element={<Form />} />
-          <Route path="/users/edit/:id" element={<Form />} />
+          <Route path="/users/new" element={<UserCreation />} />
+          <Route path="/users/edit/:id" element={<UserUpdate />} />
         </Routes>
       </BrowserRouter>
     </div>

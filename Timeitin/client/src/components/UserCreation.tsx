@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormWrapper } from "./Styles/Form";
 import * as actions from "../actions";
@@ -10,26 +9,17 @@ import { FormControl, TextField, Collapse } from "@mui/material";
 import Button from "./Button";
 import UserCreationModal from "./UserCreationModal";
 
-import { ColorPickerProps } from "../components/interfaces";
+import { ColorPickerProps, UserCreationFormProps, UserCreationFormErros } from "./interfaces";
 
 import "./Styles/Form.css";
 import "./Styles/Form.ts";
 
 const Form = () => {
-  const userId = useParams();
-  // const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
-  const { createUser, fetchUsers } = bindActionCreators(actions, dispatch);
+  const { createUser } = bindActionCreators(actions, dispatch);
   const [succesSubmition, setSuccessSubmition] = useState(false);
   const [colorPicker, setColorPicker] = useState(false);
-  const [formValues, setFormValues] = useState<{
-    firstname: null | string;
-    lastname: null | string;
-    color: ColorPickerProps["selectedColor"];
-    pincode: null | string;
-    birthdate: null | Date;
-    phonenumber: null | string;
-  }>({
+  const [formValues, setFormValues] = useState<UserCreationFormProps>({
     firstname: "",
     lastname: "",
     color: { r: 84, g: 187, b: 255, a: 0.9 },
@@ -37,35 +27,26 @@ const Form = () => {
     birthdate: new Date(""),
     phonenumber: "",
   });
-  const [errors, setErrors] = useState({
-    firstname: "",
-    lastname: "",
-    pincode: "",
-    birthdate: "",
-    phonenumber: "",
+  const [errors, setErrors] = useState<UserCreationFormErros>({
+    firstnameError: "",
+    lastnameError: "",
+    pincodeError: "",
+    birthdateError: "",
+    phonenumberError: "",
   });
 
-  // useEffect(() => dispatch(fetchUsers()), [dispatch]);
 
   const validate = () => {
     const date = formValues.birthdate.getDate();
 
-    const firstnameError = formValues.firstname ? "" : "Firstname is required";
-    const lastnameError = formValues.lastname ? "" : "Lastname is required";
-    const pincodeError = formValues.pincode ? "" : "Pincode is required";
-    const birthdateError = date ? "" : "Birthdate is required";
-    const phonenumberError = formValues.phonenumber
-      ? ""
-      : "Phonenumber is required";
-
-    setErrors({
-      ...errors,
-      firstname: firstnameError,
-      lastname: lastnameError,
-      pincode: pincodeError,
-      birthdate: birthdateError,
-      phonenumber: phonenumberError,
-    });
+    const newErrors: UserCreationFormErros = {
+      firstnameError: !formValues.firstname && "Firstname is required",
+      lastnameError: !formValues.lastname && "Lastname is required",
+      pincodeError: !formValues.pincode && "Pincode is required",
+      birthdateError: !date && "Birthdate is required",
+      phonenumberError: !formValues.phonenumber && "Phonenumber is required"
+    }
+    setErrors(newErrors);
     return Object.values(formValues).every((field) => field !== null) && date;
   };
 
@@ -137,8 +118,8 @@ const Form = () => {
                 fullWidth
                 style={{ margin: "20px" }}
                 value={formValues.firstname}
-                error={errors.firstname ? true : false}
-                helperText={errors.firstname}
+                error={errors.firstnameError ? true : false}
+                helperText={errors.firstnameError}
                 onChange={(e) =>
                   setFormValues({ ...formValues, firstname: e.target.value })
                 }
@@ -152,8 +133,8 @@ const Form = () => {
                 fullWidth
                 style={{ margin: "20px" }}
                 value={formValues.lastname}
-                error={errors.lastname ? true : false}
-                helperText={errors.lastname}
+                error={errors.lastnameError ? true : false}
+                helperText={errors.lastnameError}
                 onChange={(e) =>
                   setFormValues({ ...formValues, lastname: e.target.value })
                 }
@@ -185,8 +166,8 @@ const Form = () => {
                 fullWidth
                 value={formValues.pincode}
                 style={{ margin: "20px" }}
-                error={errors.pincode ? true : false}
-                helperText={errors.pincode}
+                error={errors.pincodeError ? true : false}
+                helperText={errors.pincodeError}
                 onChange={(e) =>
                   setFormValues({ ...formValues, pincode: e.target.value })
                 }
@@ -210,8 +191,8 @@ const Form = () => {
                 fullWidth
                 style={{ margin: "20px" }}
                 value={formValues.phonenumber}
-                error={errors.phonenumber ? true : false}
-                helperText={errors.phonenumber}
+                error={errors.phonenumberError ? true : false}
+                helperText={errors.phonenumberError}
                 onChange={(e) =>
                   setFormValues({ ...formValues, phonenumber: e.target.value })
                 }

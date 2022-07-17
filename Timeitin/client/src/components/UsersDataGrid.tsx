@@ -1,13 +1,13 @@
 import React from "react";
 import Button from "./Button";
-import { UserDataGridProps } from "./interfaces";
+import { UserDataGridProps, UserCreationFormProps } from "./interfaces";
 import "./Styles/Users.css";
 
-const userColor = ({ usericon }: UserDataGridProps) => {
-  return `rgba(${usericon.r}, ${usericon.g}, ${usericon.b}, ${usericon.a})`;
+const userColor = (color: UserCreationFormProps['color']) => {
+  return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
 };
 
-const userIcon = ({ params }: UserDataGridProps) => {
+const userIcon = (params: any) => {
   return (
     <div
       className="user-icon-small"
@@ -19,11 +19,10 @@ const userIcon = ({ params }: UserDataGridProps) => {
   );
 };
 
-const userButtons = ({
-  params,
-  setUserRowId,
-  setShowConfirmationModal,
-}: UserDataGridProps) => {
+const userButtons = (
+  params: any,
+  setShowConfirmationModal: UserDataGridProps["setShowConfirmationModal"],
+  setUserRowId: UserDataGridProps["setUserRowId"]) => {
   return (
     <>
       <Button
@@ -52,10 +51,10 @@ export const RenderColumns = (
   return [
     { field: "id", headerName: "", width: 100, hide: true },
     {
-      field: "usericon",
+      field: "color",
       headerName: "",
       width: 80,
-      renderCell: ({ params }: UserDataGridProps) => {
+      renderCell: (params: any) => {
         return userIcon(params);
       },
     },
@@ -73,17 +72,17 @@ export const RenderColumns = (
       field: "actions",
       headerName: "",
       width: 300,
-      renderCell: ({ params }: UserDataGridProps) => {
-        return userButtons(params);
+      renderCell: (params: any) => {
+        return userButtons(params, setShowConfirmationModal, setUserRowId);
       },
     },
   ];
 };
 
-export const RenderUsers = ({ users }: UserDataGridProps) => {
-  console.log(users);
+export const RenderUsers = (users: UserCreationFormProps[]) => {
+
   if (users) {
-    return users.map((user: any) => {
+    return users.map((user: UserCreationFormProps) => {
       return {
         id: user._id,
         usericon: user.color,

@@ -25,23 +25,29 @@ export interface UserCreationFormProps {
   pincode: string | null;
   birthdate: Date | null;
   phonenumber: string | null;
+  createdAt?: Date | null;
+  __v?: number | null;
+  _id?: string | null;
 }
 
 export interface UserCreationFormErros {
-  firstname: string;
-  lastname: string;
-  pincode: string;
-  birthdate: string;
-  phonenumber: string;
+  firstnameError: string | null;
+  lastnameError: string | null;
+  pincodeError: string | null;
+  birthdateError: string | null;
+  phonenumberError: string | null;
 }
 
 export interface UserDataGridProps {
-  usericon?: RgbaColor,
-  params?: any,
-  setUserRowId?: (id: string) => void,
-  setShowConfirmationModal?: (show: boolean) => void,
-  users?: Array<any>
-  RenderColumns?: (setShowConfirmationModal: (show: boolean) => void, setUserRowId: (id: string) => void) => GridColDef[],
+  color?: RgbaColor;
+  params?: any;
+  setUserRowId?: (id: string) => void;
+  setShowConfirmationModal?: (show: boolean) => void;
+  users?: Array<any>;
+  RenderColumns?: (
+    setShowConfirmationModal: (show: boolean) => void,
+    setUserRowId: (id: string) => void
+  ) => GridColDef[];
 }
 export interface DatePickerProps {
   birthdate: Date | null;
@@ -63,6 +69,7 @@ export interface ColorPickerProps {
 
 interface SignInAction {
   type: types.SIGN_IN;
+  payload: string;
 }
 interface SignOutAction {
   type: types.SIGN_OUT;
@@ -96,5 +103,3 @@ export type Action =
   | FetchUsersAction
   | DeleteUserAction
   | UpdateUserAction;
-
-

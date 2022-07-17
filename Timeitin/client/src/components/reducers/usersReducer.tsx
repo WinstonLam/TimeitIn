@@ -1,12 +1,7 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { ActionTypes as types } from "../actions/actionTypes";
+import { ActionTypes as types } from "../../actions/actionTypes";
+import { Action } from "../interfaces";
 
-interface usersReducerProps {
-  state: Array<any>;
-  action: PayloadAction<any>;
-}
-
-const usersReducer = ({state = [], action}: usersReducerProps) => {
+const usersReducer: any = (state: any[] = [], action: Action) => {
   switch (action.type) {
     case types.CREATE_USER:
     case types.FETCH_USER:
