@@ -65,13 +65,16 @@ export const deleteUser = (userId: string) => {
   };
 };
 
-// export const editUser = (userId, formValues) => {
-//   return async function (dispatch) {
-//     const response = await users.patch(`/users/${userId}`, formValues);
-//     dispatch({ type: types.EDIT_USER, payload: response.data });
-//     history.push("/");
-//   };
-// };
+export const updateUser = (userId: string, newUser: UserCreationFormProps) => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      const response = await api.updateUser(userId, newUser);
+      dispatch({ type: types.EDIT_USER, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 // export const deleteUser = (userId) => {
 //   return async function (dispacth) {

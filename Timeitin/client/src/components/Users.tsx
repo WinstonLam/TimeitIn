@@ -12,6 +12,7 @@ import "./Styles/Users.css";
 const Users = () => {
   const dispatch = useAppDispatch();
   const users: any = useSelector(selectUsers);
+  const [fetchedUsers, setFetchedUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [userRowId, setUserRowId] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -19,11 +20,11 @@ const Users = () => {
     setShowConfirmationModal,
     setUserRowId
   );
-  const rows = RenderUsers(users);
+  const rows = RenderUsers(fetchedUsers);
 
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+  useEffect(() => { dispatch(fetchUsers()) }, [dispatch]);
+  useEffect(() => { setFetchedUsers(users) }, [users]);
+
 
   const handleSelectionModelChange = (ids: GridSelectionModel) => {
     if (ids.length > 0) {

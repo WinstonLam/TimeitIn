@@ -4,10 +4,12 @@ import { Action } from "../interfaces";
 const usersReducer: any = (state: any[] = [], action: Action) => {
   switch (action.type) {
     case types.CREATE_USER:
-    case types.FETCH_USER:
     case types.EDIT_USER:
+    case types.FETCH_USER:
       return [...state, action.payload];
     case types.FETCH_USERS:
+
+
       // const newObj = {};
       // action.payload.forEach((element) => {
       //   newObj[element.id] = element;
@@ -21,5 +23,7 @@ const usersReducer: any = (state: any[] = [], action: Action) => {
       return state;
   }
 };
+
+
 
 export default usersReducer;
