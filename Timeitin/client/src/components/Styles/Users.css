@@ -40,8 +40,6 @@
   
 }
 
-
-
 .delete-user, .create-user{
     border-radius: 2rem;
     height: 50px;
@@ -67,24 +65,37 @@
 }
 
 .selections {
-    
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    align-items: center;
+    grid-row-gap: 0px;
 }
+
+.selections h3{
+    grid-area: 1 / 1 / 2 / 2;
+    margin: 0px;
+}
+
 .user-icons{
+    grid-area: 1 / 2 / 2 / 4;
     display: flex;
+    align-items: center;
 }
+
+
 .selections .user-icon-small{
     margin: 10px;
     max-width: 250px;
-    width: 13%;
-    height: 40%;
-    margin: 0.5%;
+    width: 40px;
+    height: 40px;
+    margin: 2.5%;
 }
 
 .user-icon-small{
+    border-color: black;
+    border: 1px solid;
     border-radius: 5rem;
     height: 90%;
     width: 60%;

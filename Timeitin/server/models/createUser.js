@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema({
   color: { r: Number, g: Number, b: Number, a: Number },
   pincode: String,
   birthdate: Date,
+  function: String,
   phonenumber: String,
   createdAt: { type: Date, default: Date.now },
 });

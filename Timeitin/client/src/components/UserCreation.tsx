@@ -5,7 +5,7 @@ import { FormWrapper } from "./Styles/Form";
 import * as actions from "../actions";
 import ColorPicker from "./ColorPicker";
 import DateSelector from "./DatePicker";
-import { FormControl, TextField, Collapse } from "@mui/material";
+import { FormControl, TextField, Collapse, Select, MenuItem, InputLabel, FormHelperText } from "@mui/material";
 import Button from "./Button";
 import UserCreationModal from "./UserCreationModal";
 
@@ -25,6 +25,7 @@ const Form = () => {
     color: { r: 84, g: 187, b: 255, a: 0.9 },
     pincode: "",
     birthdate: new Date(""),
+    function: "",
     phonenumber: "",
   });
   const [errors, setErrors] = useState<UserCreationFormErros>({
@@ -32,8 +33,12 @@ const Form = () => {
     lastnameError: "",
     pincodeError: "",
     birthdateError: "",
+    functionError: "",
     phonenumberError: "",
   });
+
+  // for now hardcoded will be adjusted later
+  const functions = ["Manager", "Delivery", "Kitchen", "Bar", "Waiter"];
 
 
   const validate = () => {
@@ -44,10 +49,11 @@ const Form = () => {
       lastnameError: !formValues.lastname && "Lastname is required",
       pincodeError: !formValues.pincode && "Pincode is required",
       birthdateError: !date && "Birthdate is required",
+      functionError: !formValues.function && "Function is required",
       phonenumberError: !formValues.phonenumber && "Phonenumber is required"
     }
     setErrors(newErrors);
-    return Object.values(formValues).every((field) => field !== null) && date;
+    return Object.values(formValues).every((field) => field !== "") && date;
   };
 
   const handleColorToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -85,6 +91,7 @@ const Form = () => {
       color: { r: 84, g: 187, b: 255, a: 0.9 },
       pincode: "",
       birthdate: null,
+      function: "",
       phonenumber: "",
     });
   };
@@ -175,6 +182,22 @@ const Form = () => {
             </div>
 
             <div className="form-row-5">
+              <FormControl fullWidth
+                style={{ margin: "20px" }}
+                error={errors.functionError ? true : false}>
+                <InputLabel >Function</InputLabel>
+                <Select
+                  value={formValues.function}
+                  label="Function"
+                  onChange={(e) => setFormValues({ ...formValues, function: e.target.value })}
+                >
+                  {functions.map((func) => (<MenuItem key={func} value={func}>{func}</MenuItem>))}
+
+                </Select>
+                <FormHelperText>{errors.functionError && (errors.functionError)}</FormHelperText>
+              </FormControl>
+            </div>
+            <div className="form-row-6">
               <DateSelector
                 birthdate={formValues.birthdate}
                 errors={errors}
@@ -183,7 +206,7 @@ const Form = () => {
                 maxDate={-10}
               />
             </div>
-            <div className="form-row-6">
+            <div className="form-row-7">
               <TextField
                 name="phonernumber"
                 variant="outlined"
@@ -199,7 +222,7 @@ const Form = () => {
               />
             </div>
 
-            <div className="form-row-7">
+            <div className="form-row-8">
               <div className="form-actions">
                 <Button text="Submit"></Button>
                 <Button

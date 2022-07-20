@@ -2,9 +2,11 @@ import { ActionTypes as types } from "./actionTypes";
 import { Action } from "../components/interfaces";
 import * as api from "../components/api";
 import { Dispatch } from "redux";
-import { UserCreationFormProps } from "../components/interfaces";
+import {
+  UserCreationFormProps,
+  AdminCreationFormProps,
+} from "../components/interfaces";
 
-type ActionType = (dispatch: Dispatch<Action>) => Promise<void>;
 // import history from "../";
 
 // export const signIn = (userId) => {
@@ -19,6 +21,29 @@ type ActionType = (dispatch: Dispatch<Action>) => Promise<void>;
 //     type: types.SIGN_OUT,
 //   };
 // };
+
+export const createAdmin = (newAdmin: AdminCreationFormProps) => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      const response = await api.createAdmin(newAdmin);
+      dispatch({ type: types.CREATE_USER, payload: response.data });
+      // history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const fetchAdmin = () => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      const response = await api.fetchAdmin();
+      dispatch({ type: types.FETCH_ADMIN, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const createUser = (newUser: UserCreationFormProps) => {
   return async function (dispatch: Dispatch<Action>) {
@@ -75,11 +100,3 @@ export const updateUser = (userId: string, newUser: UserCreationFormProps) => {
     }
   };
 };
-
-// export const deleteUser = (userId) => {
-//   return async function (dispacth) {
-//     await users.delete(`/users/${userId}`);
-//     dispacth({ type: types.DELETE_USER, payload: userId });
-//     history.push("/");
-//   };
-// };

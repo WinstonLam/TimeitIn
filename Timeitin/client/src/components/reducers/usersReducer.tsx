@@ -10,6 +10,7 @@ const usersReducer: any = (state: any[] = [], action: Action) => {
     case types.FETCH_USERS:
 
 
+
       // const newObj = {};
       // action.payload.forEach((element) => {
       //   newObj[element.id] = element;

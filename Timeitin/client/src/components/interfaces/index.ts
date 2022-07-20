@@ -1,6 +1,22 @@
 import { RgbaColor } from "react-colorful";
 import { ActionTypes as types } from "../../actions/actionTypes";
 import { GridColDef } from "@mui/x-data-grid";
+
+// __________________________________________________________________________________
+// Admin actions types
+// __________________________________________________________________________________
+
+export interface AdminCreationFormProps {
+  pincode: string | null;
+  createdAt?: Date | null;
+  __v?: number | null;
+  _id?: string | null;
+}
+
+// __________________________________________________________________________________
+// User actions types
+// __________________________________________________________________________________
+
 export interface BasicArrays {
   pages: Array<string>;
   links: Array<string>;
@@ -24,6 +40,7 @@ export interface UserCreationFormProps {
   color: RgbaColor;
   pincode: string | null;
   birthdate: Date | null;
+  function: string | null;
   phonenumber: string | null;
   createdAt?: Date | null;
   __v?: number | null;
@@ -35,6 +52,7 @@ export interface UserCreationFormErros {
   lastnameError: string | null;
   pincodeError: string | null;
   birthdateError: string | null;
+  functionError: string | null;
   phonenumberError: string | null;
 }
 
@@ -67,6 +85,9 @@ export interface ColorPickerProps {
 // redux actions types
 // __________________________________________________________________________________
 
+// AUTHENTICATION ACTIONS TYPES
+// __________________________________________________________________________________
+
 interface SignInAction {
   type: types.SIGN_IN;
   payload: string;
@@ -74,6 +95,10 @@ interface SignInAction {
 interface SignOutAction {
   type: types.SIGN_OUT;
 }
+
+// USER ACTIONS TYPES
+// __________________________________________________________________________________
+
 interface CreateUserAction {
   type: types.CREATE_USER;
   payload: UserCreationFormProps;
@@ -95,6 +120,26 @@ interface UpdateUserAction {
   payload: UserCreationFormProps;
 }
 
+// ADMIN ACTIONS TYPES
+// __________________________________________________________________________________
+
+interface CreateAdminAction {
+  type: types.CREATE_ADMIN;
+  payload: AdminCreationFormProps;
+}
+interface FetchAdminAction {
+  type: types.FETCH_ADMIN;
+  payload: AdminCreationFormProps;
+}
+
+interface DeleteAdminAction {
+  type: types.DELETE_ADMIN;
+  payload: string;
+}
+interface UpdateAdminAction {
+  type: types.EDIT_ADMIN;
+  payload: AdminCreationFormProps;
+}
 export type Action =
   | SignInAction
   | SignOutAction
@@ -102,4 +147,8 @@ export type Action =
   | FetchUserAction
   | FetchUsersAction
   | DeleteUserAction
-  | UpdateUserAction;
+  | UpdateUserAction
+  | CreateAdminAction
+  | FetchAdminAction
+  | DeleteAdminAction
+  | UpdateAdminAction;

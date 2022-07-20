@@ -9,9 +9,9 @@ import { fetchUser } from "../actions";
 import * as actions from "../actions";
 import ColorPicker from "./ColorPicker";
 import DateSelector from "./DatePicker";
-import { FormControl, TextField, Collapse } from "@mui/material";
+import { FormControl, TextField, Collapse, Select, MenuItem, InputLabel, FormHelperText } from "@mui/material";
 import Button from "./Button";
-import UserCreationModal from "./UserCreationModal";
+import UserUpdateModal from "./UserUpdateModal";
 
 import { ColorPickerProps, UserCreationFormProps, UserCreationFormErros } from "./interfaces";
 
@@ -22,7 +22,6 @@ const Form = () => {
 
   const userId = useParams().id;
   const user: any = useSelector(selectUsers);
-
   const dispatch = useAppDispatch();
   const { updateUser } = bindActionCreators(actions, dispatch);
   const [succesSubmition, setSuccessSubmition] = useState(false);
@@ -33,17 +32,21 @@ const Form = () => {
     color: !user ? user.color : { r: 84, g: 187, b: 255, a: 0.9 },
     pincode: !user ? user.pincode : "",
     birthdate: !user ? user.birthdate : new Date(""),
+    function: !user ? user.function : "",
     phonenumber: !user ? user.phonenumber : "",
   });
-
 
   const [errors, setErrors] = useState<UserCreationFormErros>({
     firstnameError: "",
     lastnameError: "",
     pincodeError: "",
     birthdateError: "",
+    functionError: "",
     phonenumberError: "",
   });
+
+  // for now hardcoded will be adjusted later
+  const functions = ["Manager", "Delivery", "Kitchen", "Bar", "Waiter"];
 
   useEffect(() => { dispatch(fetchUser(userId)) }, [dispatch]);
   useEffect(() => {
@@ -55,6 +58,7 @@ const Form = () => {
         color: selectedUser.color,
         pincode: selectedUser.pincode,
         birthdate: selectedUser.birthdate,
+        function: selectedUser.function,
         phonenumber: selectedUser.phonenumber
       });
     }
@@ -69,6 +73,7 @@ const Form = () => {
       lastnameError: !formValues.lastname && "Lastname is required",
       pincodeError: !formValues.pincode && "Pincode is required",
       birthdateError: !date && "Birthdate is required",
+      functionError: !formValues.function && "Function is required",
       phonenumberError: !formValues.phonenumber && "Phonenumber is required"
     }
     setErrors(newErrors);
@@ -111,6 +116,7 @@ const Form = () => {
       color: { r: 84, g: 187, b: 255, a: 0.9 },
       pincode: "",
       birthdate: null,
+      function: "",
       phonenumber: "",
     });
   };
@@ -122,7 +128,7 @@ const Form = () => {
 
   return (
     <div className="container">
-      <UserCreationModal
+      <UserUpdateModal
         succesSubmition={succesSubmition}
         setSuccessSubmition={setSuccessSubmition}
         clear={clear}
@@ -204,6 +210,22 @@ const Form = () => {
             </div>
 
             <div className="form-row-5">
+              <FormControl fullWidth
+                style={{ margin: "20px" }}
+                error={errors.functionError ? true : false}>
+                <InputLabel >Function</InputLabel>
+                <Select
+                  value={formValues.function}
+                  label="Function"
+                  onChange={(e) => setFormValues({ ...formValues, function: e.target.value })}
+                >
+                  {functions.map((func) => (<MenuItem key={func} value={func}>{func}</MenuItem>))}
+
+                </Select>
+                <FormHelperText>{errors.functionError && (errors.functionError)}</FormHelperText>
+              </FormControl>
+            </div>
+            <div className="form-row-6">
               <DateSelector
                 birthdate={formValues.birthdate}
                 errors={errors}
@@ -212,7 +234,7 @@ const Form = () => {
                 maxDate={-10}
               />
             </div>
-            <div className="form-row-6">
+            <div className="form-row-7">
               <TextField
                 name="phonernumber"
                 variant="outlined"
@@ -228,7 +250,7 @@ const Form = () => {
               />
             </div>
 
-            <div className="form-row-7">
+            <div className="form-row-8">
               <div className="form-actions">
                 <Button text="Submit"></Button>
                 <Button

@@ -60,6 +60,7 @@ export const RenderColumns = (
     },
     { field: "firstname", headerName: "Firstname", width: 90, editable: true },
     { field: "lastname", headerName: "Lastname", width: 90, editable: true },
+    { field: "function", headerName: "Function", width: 90, editable: true },
     {
       field: "phonenumber",
       headerName: "Phonenumber",
@@ -88,6 +89,7 @@ export const RenderUsers = (users: UserCreationFormProps[]) => {
         usericon: user.color,
         firstname: user.firstname,
         lastname: user.lastname,
+        function: user.function,
         phonenumber: user.phonenumber,
         birthdate: user.birthdate,
         pincode: user.pincode,

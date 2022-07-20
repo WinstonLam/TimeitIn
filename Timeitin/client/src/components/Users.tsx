@@ -93,7 +93,8 @@ const Users = () => {
             <div className="selections">
               {selectedUsers.length > 0 && (
                 <>
-                  Selected users:
+                  <h3> Selected users:</h3>
+
                   <div
                     className="user-icons"
                     style={{ display: "flex", height: "100%" }}

@@ -1,0 +1,23 @@
+.home-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+.timeitin-logo img{
+    margin: 20px;
+    height: 250px;
+    width: 250px;
+    animation: rotate 10s ease infinite forwards;
+}
+
+@keyframes rotate{
+    0%{transform: rotate(0deg);}
+    25%{transform: rotate(0deg);}
+    50%{transform: rotate(180deg);}
+    75%{transform: rotate(180deg);}
+    100%{transform: rotate(360deg) }
+
+}
