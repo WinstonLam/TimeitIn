@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(cors());
 
 app.use("/users", getUsers);
-app.use("/settings/admin", getAdmin);
+app.use("/admin", getAdmin);
 
 const CONNECTION_URL =
   "mongodb+srv://winston:L5JiMIxOUpMNuWFR@timitin.8kovydu.mongodb.net/?retryWrites=true&w=majority";

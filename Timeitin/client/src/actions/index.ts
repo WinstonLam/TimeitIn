@@ -22,12 +22,11 @@ import {
 //   };
 // };
 
-export const createAdmin = (newAdmin: AdminCreationFormProps) => {
+export const createAdmin = (admin: AdminCreationFormProps) => {
   return async function (dispatch: Dispatch<Action>) {
     try {
-      const response = await api.createAdmin(newAdmin);
-      dispatch({ type: types.CREATE_USER, payload: response.data });
-      // history.push("/");
+      const response = await api.createAdmin(admin);
+      dispatch({ type: types.CREATE_ADMIN, payload: response.data });
     } catch (error) {
       console.log(error);
     }

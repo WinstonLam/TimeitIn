@@ -7,7 +7,7 @@ import { GridColDef } from "@mui/x-data-grid";
 // __________________________________________________________________________________
 
 export interface AdminCreationFormProps {
-  pincode: string | null;
+  pincode: string[] | null;
   createdAt?: Date | null;
   __v?: number | null;
   _id?: string | null;

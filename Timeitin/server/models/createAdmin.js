@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const adminSchema = mongoose.Schema({
-  pincode: String,
+  pincode: [String],
   createdAt: { type: Date, default: Date.now },
 });
 

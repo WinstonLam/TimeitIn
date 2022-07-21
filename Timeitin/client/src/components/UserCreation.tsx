@@ -11,7 +11,7 @@ import UserCreationModal from "./UserCreationModal";
 
 import { ColorPickerProps, UserCreationFormProps, UserCreationFormErros } from "./interfaces";
 
-import "./Styles/Form.css";
+import "./Styles/UserForm.css";
 import "./Styles/Form.ts";
 
 const Form = () => {
@@ -116,8 +116,8 @@ const Form = () => {
               </h1>
             </div>
           </div>
-          <form autoComplete="off" onSubmit={handleSubmit}>
-            <div className="form-row-1">
+          <form className="user-form" autoComplete="off" onSubmit={handleSubmit}>
+            <div className="user-form-row-1">
               <TextField
                 name="firstName"
                 variant="outlined"
@@ -132,7 +132,7 @@ const Form = () => {
                 }
               />
             </div>
-            <div className="form-row-2">
+            <div className="user-form-row-2">
               <TextField
                 name="lastName"
                 variant="outlined"
@@ -147,7 +147,7 @@ const Form = () => {
                 }
               />
             </div>
-            <div className="form-row-3">
+            <div className="user-form-row-3">
               <div className="color-picker-title">
                 <h3>Color:</h3>
                 <button
@@ -165,7 +165,7 @@ const Form = () => {
                 </Collapse>
               </div>
             </div>
-            <div className="form-row-4">
+            <div className="user-form-row-4">
               <TextField
                 name="pincode"
                 variant="outlined"
@@ -181,7 +181,7 @@ const Form = () => {
               />
             </div>
 
-            <div className="form-row-5">
+            <div className="user-form-row-5">
               <FormControl fullWidth
                 style={{ margin: "20px" }}
                 error={errors.functionError ? true : false}>
@@ -197,7 +197,7 @@ const Form = () => {
                 <FormHelperText>{errors.functionError && (errors.functionError)}</FormHelperText>
               </FormControl>
             </div>
-            <div className="form-row-6">
+            <div className="user-form-row-6">
               <DateSelector
                 birthdate={formValues.birthdate}
                 errors={errors}
@@ -206,7 +206,7 @@ const Form = () => {
                 maxDate={-10}
               />
             </div>
-            <div className="form-row-7">
+            <div className="user-form-row-7">
               <TextField
                 name="phonernumber"
                 variant="outlined"
@@ -222,7 +222,7 @@ const Form = () => {
               />
             </div>
 
-            <div className="form-row-8">
+            <div className="user-form-row-8">
               <div className="form-actions">
                 <Button text="Submit"></Button>
                 <Button
