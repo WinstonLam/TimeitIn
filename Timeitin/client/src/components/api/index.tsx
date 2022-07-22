@@ -1,7 +1,7 @@
 import axios from "axios";
 import { UserCreationFormProps, AdminCreationFormProps } from "../interfaces";
-const admin = " http://localhost:5000/admin"
-const users = "http://localhost:5000/users";
+const admin = "/admin";
+const users = "/users";
 
 // Admin related functions
 export const createAdmin = (newAdmin: AdminCreationFormProps) => axios.post(admin, newAdmin);

@@ -11,8 +11,8 @@ app.use(bodyParser.json({ limit: "10mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(cors());
 
-app.use("/users", getUsers);
 app.use("/admin", getAdmin);
+app.use("/users", getUsers);
 
 const CONNECTION_URL =
   "mongodb+srv://winston:L5JiMIxOUpMNuWFR@timitin.8kovydu.mongodb.net/?retryWrites=true&w=majority";
