@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import Button from './Button';
-import Modal from './Modal';
+import Button from '../Button';
+import Modal from './ModalTemplate';
 
 
 interface ConfirmationModalProps {

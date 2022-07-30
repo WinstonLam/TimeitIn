@@ -5,7 +5,7 @@ import { useAppDispatch } from "./hooks";
 import { fetchUsers, deleteUser } from "../actions";
 import Button from "././Button";
 import { RenderColumns, RenderUsers } from "./UsersDataGrid";
-import ConfirmationModal from "./ConfirmationModal";
+import ConfirmationModal from "./modals/ConfirmationModal";
 import { DataGrid, GridSelectionModel, GridColDef } from "@mui/x-data-grid";
 import "./Styles/Users.css";
 

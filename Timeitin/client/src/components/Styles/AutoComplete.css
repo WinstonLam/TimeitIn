@@ -1,0 +1,124 @@
+
+.input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+  }
+
+  .label {
+    font-size: 16px;
+    line-height: 16px;
+    position: absolute;
+    left: 5%;
+    bottom: 35%;
+    transition: all 0.25s ease;
+    pointer-events: none;
+    background: inherit;
+  }
+  .icon {
+    position: absolute;
+    width: 30px;
+    left: 85%;
+    top: 15%;
+    fill: rgb(146, 143, 143);
+    transform: rotate(180deg);
+    transition: all .15s ease-in-out;
+  }
+
+  .auto-complete {
+    height: 30px;
+    width: 250px;
+    padding: 6px 17px;
+    font-size: 18px;
+    border-radius: 1rem;
+    background: inherit;
+    border: 2px solid rgb(146, 143, 143);
+    z-index: -1;
+    -webkit-appearance: none;
+    -webkit-transition: border .15s ease-in-out;
+    transition: border .15s ease-in-out;
+  }
+
+.options-wrapper{
+  width: 250px;
+  height: 300px;
+  position: absolute;
+  top: 100%;
+  opacity: 0;
+  border: 3px solid aliceblue;
+  transform: translate(6%, -12%);
+  background-color: inherit;
+  border-radius: 2rem;
+  pointer-events: none;
+  transition: all .15s ease-in-out;
+  clip-path: polygon(0 12%, 100% 12%, 100% 100%, 0% 100%);
+}
+.options{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px;
+  transform: translateY(12%);
+  width: 95%;
+  height: 80%;
+  color: aliceblue;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+
+.auto-complete.show {
+    outline: none;
+    border: 2px solid aliceblue;
+  }
+  .auto-complete:focus {
+    outline: none;
+  }
+
+.auto-complete:-webkit-autofill {
+    animation-name: onAutoFillStart;
+  }
+
+.auto-complete:not(:-webkit-autofill) {
+    animation-name: onAutoFillCancel;
+}
+.options-wrapper.show{
+  pointer-events: all;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+.label.show {
+    bottom: 98%;
+    font-size: 15px;
+    pointer-events: all;
+  }
+  .icon.show {
+    fill: white;
+    transform: rotate(0deg);
+  }
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 2rem;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+/* Animations to detect autofill */
+@keyframes onAutoFillStart {
+}
+
+@keyframes onAutoFillCancel {
+}
+

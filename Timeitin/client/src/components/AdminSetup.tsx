@@ -7,7 +7,7 @@ import { PinInput } from 'react-input-pin-code'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Button from "./Button";
-import UserCreationModal from "./UserCreationModal";
+import AdminSetupModal from "./modals/AdminSetupModal";
 
 import "./Styles/AdminSetup.css";
 import "./Styles/Form.ts";
@@ -31,7 +31,7 @@ const AdminSetup = () => {
         }
         setRequired(false);
         createAdmin(admin);
-        // setSuccessSubmition(true);
+        setSuccessSubmition(true);
     };
 
     const clear = () => {
@@ -40,16 +40,16 @@ const AdminSetup = () => {
     };
 
     return (
+
         <div className="container">
-            <UserCreationModal
+            <AdminSetupModal
                 succesSubmition={succesSubmition}
-                setSuccessSubmition={setSuccessSubmition}
-                clear={clear}
+                pincode={admin.pincode}
             />
             <FormWrapper in={!succesSubmition}>
                 <form className="admin-form" autoComplete="off" onSubmit={handleSubmit}>
                     <div className="admin-form-row-1">
-                        <h3>Choose a pincode to setup</h3>
+                        <h1>Choose a pincode to setup</h1>
                     </div>
                     <div className="admin-form-row-2">
                         <PinInput
@@ -58,11 +58,11 @@ const AdminSetup = () => {
                             values={admin.pincode}
                             mask={mask}
                             onChange={(value, index, values) => { setAdmin({ ...admin, pincode: values }) }}
-                            inputStyle={{ height: "75px", width: "75px", borderRadius: "3rem", borderColor: "black", border: "2px solid" }}
+                            inputStyle={{ fontSize: "30px", height: "75px", width: "75px", borderRadius: "3rem", borderColor: "black", border: "2px solid" }}
 
                         />
                         <div className="visibility" onClick={(e) => { setMask(!mask) }}>
-                            {mask ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            {mask ? <VisibilityOffIcon fontSize="large" /> : <VisibilityIcon fontSize="large" />}
                         </div>
                     </div>
 
@@ -81,6 +81,7 @@ const AdminSetup = () => {
                 </form>
             </FormWrapper>
         </div >
+
     );
 };
 

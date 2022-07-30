@@ -1,46 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectAdmin } from "./strore";
+import { selectAdmin, selectUsers } from "./strore";
 import { useAppDispatch } from "./hooks";
-import { fetchAdmin } from "../actions";
+import { fetchAdmin, fetchUsers } from "../actions";
 import Button from "././Button";
+import AutoComplete from "./Autocomplete";
+
 import "./Styles/Home.css";
 import TimeitinLogo from "./images/TimeitinLogo.png";
-import AuthModal from "./AuthModal";
+
 
 const Home = () => {
     const dispatch = useAppDispatch();
     const fetchedAdmin: any = useSelector(selectAdmin);
+    const fetchedUsers: any = useSelector(selectUsers);
     const [admin, setAdmin] = useState(null);
+    const [users, setFetchedUsers] = useState([]);
 
     useEffect(() => { dispatch(fetchAdmin()) }, [dispatch]);
+    useEffect(() => { dispatch(fetchUsers()) }, [dispatch]);
     useEffect(() => { setAdmin(fetchedAdmin) }, [fetchedAdmin]);
+    useEffect(() => { setFetchedUsers(fetchedUsers) }, [fetchedUsers]);
 
-    if (fetchedAdmin.length === 0) return
+    if (!admin) return
 
-    return (<>
+    return (
         <div className="home-container">
             <div className="timeitin-logo"> <img
 
                 src={TimeitinLogo}
                 alt="timeitin logo"
             /></div>
-            <AuthModal
-                onAuthorization={true}
-                clear={() => { }}
-                setOnAuthorization={() => { }}
-                currentPath="/"
-                successAuthPath="/"
-            />
-            {!admin ?
+            {admin.length === 0 ?
                 <>
                     <p>Welcome to Timeitin let's get you setup</p>
                     <Button text="Click here to setup" link="/setup" />
                 </>
                 :
-                <Button text="Click here to login" />}
+                <>
+                    <p>Welcome to Timeitin</p>
+                    <AutoComplete {...users} />
+                    <Button text="Click here to login" />
+                </>
+            }
         </div>
-    </>);
+    );
 
 }
 

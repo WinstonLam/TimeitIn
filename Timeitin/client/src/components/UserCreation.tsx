@@ -7,7 +7,7 @@ import ColorPicker from "./ColorPicker";
 import DateSelector from "./DatePicker";
 import { FormControl, TextField, Collapse, Select, MenuItem, InputLabel, FormHelperText } from "@mui/material";
 import Button from "./Button";
-import UserCreationModal from "./UserCreationModal";
+import UserCreationModal from "./modals/UserCreationModal";
 
 import { ColorPickerProps, UserCreationFormProps, UserCreationFormErros } from "./interfaces";
 

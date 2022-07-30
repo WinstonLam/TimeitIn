@@ -1,7 +1,7 @@
 
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import Button from './Button';
-import Modal from './Modal';
+import Button from '../Button';
+import Modal from './ModalTemplate';
 import { useNavigate } from 'react-router-dom';
 
 interface UserCreationModalProps {
@@ -29,7 +29,7 @@ const UserCreationModal: FunctionComponent<UserCreationModalProps> = ({ clear, s
     let navigate = useNavigate();
     const [showModal, setShowModal] = useState(succesSubmition);
 
-    useEffect(()=>{setShowModal(succesSubmition)}, [succesSubmition]);
+    useEffect(() => { setShowModal(succesSubmition) }, [succesSubmition]);
 
     const handleReset = () => {
         setShowModal(!showModal);
@@ -51,7 +51,8 @@ const UserCreationModal: FunctionComponent<UserCreationModalProps> = ({ clear, s
             alertType="success"
             show={showModal}
             handleClose={handleClose}
-            content={content(handleReset, handleClose)} />
+            content={content(handleReset, handleClose)}
+            width="500px" />
     );
 }
 

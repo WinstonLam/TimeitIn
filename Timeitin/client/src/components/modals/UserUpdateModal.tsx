@@ -1,7 +1,7 @@
 
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import Button from './Button';
-import Modal from './Modal';
+import Button from '../Button';
+import Modal from './ModalTemplate';
 import { useNavigate } from 'react-router-dom';
 
 interface UserCreationModalProps {

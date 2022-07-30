@@ -16,11 +16,8 @@
 
 .modal.active, .modal{
   position: fixed;
-  min-width: 340px;
-  max-width: 800px;
   top: 40%;
   left: 50%;
-  width: 50%;
   transform:  translate(-50%, -50%);
   border-radius: 3rem;
   background-color: #394854;
@@ -51,7 +48,7 @@
 
 .closing-button{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     width: 97%;
     position: absolute;
     margin-top: 4%;
@@ -60,6 +57,7 @@
 
 .closing-button button{
     background: none;
+    color: white;
     border: none;
     cursor: pointer;
     transform: rotate(45deg);
