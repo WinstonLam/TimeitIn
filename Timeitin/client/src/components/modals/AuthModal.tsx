@@ -69,7 +69,6 @@ const AuthModal: FunctionComponent<UserAuthModalProps> = ({ currentPath, onAutho
 
     const handleChange = (values: string[], setPinError: any, pinError: any) => {
         setPin(values)
-
     }
 
     const handleSubmit = () => {

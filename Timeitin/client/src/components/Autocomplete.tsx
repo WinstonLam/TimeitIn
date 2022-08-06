@@ -3,7 +3,8 @@ import { ReactComponent as Dropdown } from "./images/dropdown.svg";
 
 import "./Styles/AutoComplete.css";
 
-const AutoComplete = (options: Array<any>) => {
+const AutoComplete = (props: { options: Array<any>, setValue: any }) => {
+
     const [inputState, setInputState] = useState({
         value: "",
         hide: false,
@@ -11,7 +12,7 @@ const AutoComplete = (options: Array<any>) => {
         selection: false,
         show: false
     });
-    const optionList = (Object.values(options))
+    const optionList = (Object.values(props.options))
 
 
     useEffect(() => {
@@ -21,6 +22,13 @@ const AutoComplete = (options: Array<any>) => {
             setInputState({ ...inputState, show: false })
         }
     }, [inputState.focus, inputState.hide, inputState.selection]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputState({ ...inputState, value: e.target.value })
+        if (e.target.value.length === 0) {
+            props.setValue(null)
+        }
+    }
 
     const handleOnClick = (e: React.MouseEvent<HTMLInputElement>) => {
         setInputState({ ...inputState, focus: !inputState.focus })
@@ -32,45 +40,52 @@ const AutoComplete = (options: Array<any>) => {
 
     const handleSelection = (e: React.MouseEvent<HTMLDivElement>, option: any) => {
         setInputState({ ...inputState, value: option.firstname, selection: true })
+        props.setValue(option)
     }
 
-    const handleMouseLeave = (e: React.MouseEvent<HTMLLabelElement>) => {
-        setInputState({ ...inputState, focus: false, selection: false })
+    const handleMouseLeave = () => {
+        setInputState({ ...inputState, focus: false })
     }
 
     return (
 
-        <label className="input-container"
-            // Use mouse events to decide if input is focussed or not
-            onMouseLeave={handleMouseLeave}
-        >
-            <input className={`auto-complete ${inputState.show ? "show" : ""}`}
-                value={inputState.value}
-                type="text"
-                maxLength={20}
-                name="name"
-                onAnimationStart={handleAutoFill}
-                onClick={handleOnClick}
-                onChange={(e) => setInputState({ ...inputState, value: e.target.value })} />
-            <span className={`label ${inputState.value ? "show" : ""}`} >Select your name</span>
-            <Dropdown className={`icon ${inputState.show ? "show" : ""}`} />
+        <div className="input-container"
+        // Use mouse events to decide if input is focussed or not
 
-            <div className={`options-wrapper ${inputState.show ? "show" : ""}`}>
-                <div className="options">
-                    {optionList.map((option) => {
-                        return (
-                            <div className="option"
-                                key={option._id}
-                                onClick={(e) => handleSelection(e, option)}>
-                                {option.firstname}
-                                <hr style={{ width: "220px", border: "1px solid aliceblue" }} />
-                            </div>
-                        )
-                    })
-                    }
+        >
+            <label>
+                <div>
+                    <input className={`auto-complete ${inputState.show ? "show" : ""}`}
+                        value={inputState.value}
+                        type="text"
+                        maxLength={20}
+                        name="name"
+                        onAnimationStart={handleAutoFill}
+                        onClick={handleOnClick}
+                        onChange={handleChange} />
                 </div>
-            </div>
-        </label>
+                <span className={`label ${inputState.value ? "show" : ""}`} >Select your name</span>
+                <Dropdown className={`dropdown-icon ${inputState.show ? "show" : ""}`} />
+
+                <div onBlur={handleMouseLeave} className={`options-wrapper ${inputState.show ? "show" : ""}`} >
+                    <div className="options">
+                        {optionList.filter((option) => {
+                            const searchTerm = inputState.value.toLowerCase();
+                            return option.firstname.startsWith(searchTerm)
+                        })
+                            .map((option) => {
+                                return (
+                                    <div className="option"
+                                        key={option._id}
+                                        onClick={(e) => handleSelection(e, option)}>
+                                        {option.firstname}
+                                        <hr style={{ width: "100%", border: "1px solid aliceblue" }} />
+                                    </div>)
+                            })}
+                    </div>
+                </div>
+            </label>
+        </div>
 
 
     );

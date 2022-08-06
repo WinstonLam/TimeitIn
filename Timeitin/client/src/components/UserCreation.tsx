@@ -13,6 +13,7 @@ import { ColorPickerProps, UserCreationFormProps, UserCreationFormErros } from "
 
 import "./Styles/UserForm.css";
 import "./Styles/Form.ts";
+import { FourMp } from "@mui/icons-material";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -74,6 +75,15 @@ const Form = () => {
       birthdate: date,
     });
   };
+
+  const handlePinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isLetters = (str: string) => /^[0-9]*$/.test(str);
+    const pin = e.target.value;
+    if (isLetters(pin) && formValues.pincode.length < 6) {
+      setFormValues({ ...formValues, pincode: e.target.value });
+    }
+  }
+
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -175,9 +185,7 @@ const Form = () => {
                 style={{ margin: "20px" }}
                 error={errors.pincodeError ? true : false}
                 helperText={errors.pincodeError}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, pincode: e.target.value })
-                }
+                onChange={handlePinChange}
               />
             </div>
 

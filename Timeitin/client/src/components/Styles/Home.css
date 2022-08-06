@@ -13,6 +13,21 @@
     animation: rotate 10s ease infinite forwards;
 }
 
+
+.user-login-pincode{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    transition: all .5s ease-in-out;
+}
+
+.user-login-pincode.show{
+    visibility: visible;
+}
+
+
 @keyframes rotate{
     0%{transform: rotate(0deg);}
     25%{transform: rotate(0deg);}
