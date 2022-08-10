@@ -46,7 +46,7 @@ const Home = () => {
     }, [pin]);
 
     const handleSubmit = () => {
-        navigate("/users");
+        navigate("/user/" + selectedUser._id, { state: { user: selectedUser } });
     }
 
     const handleChange = (values: string[], setPinError: any, pinError: any) => {

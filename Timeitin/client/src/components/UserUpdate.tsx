@@ -19,7 +19,6 @@ import "./Styles/UserForm.css";
 import "./Styles/Form.ts";
 
 const Form = () => {
-
   const userId = useParams().id;
   const user: any = useSelector(selectUsers);
   const dispatch = useAppDispatch();

@@ -1,6 +1,9 @@
 // This file is to find misspell bugs more easily
 export enum ActionTypes {
   // User action types
+  SET_USER = "SET_USER",
+  UNSET_USER = "UNSET_USER",
+  // Users action types
   SIGN_IN = "SIGN_IN",
   SIGN_OUT = "SIGN_OUT",
   CREATE_USER = "CREATE_USER",

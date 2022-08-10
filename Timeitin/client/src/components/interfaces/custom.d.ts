@@ -8,3 +8,6 @@ declare module "*.svg" {
   const src: string;
   export default src;
 }
+
+declare module '@mui/icons-material/VisibilityOff';
+declare module '@mui/icons-material/Visibility';
