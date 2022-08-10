@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { selectAdmin, selectUsers } from "./strore";
 import { useAppDispatch } from "./hooks";
-import { fetchAdmin, fetchUsers } from "../actions";
+import { fetchAdmin, fetchUsers, setUser } from "../actions";
 import { PinInput } from 'react-input-pin-code';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -46,6 +46,7 @@ const Home = () => {
     }, [pin]);
 
     const handleSubmit = () => {
+        dispatch(setUser(selectedUser));
         navigate("/user/" + selectedUser._id, { state: { user: selectedUser } });
     }
 

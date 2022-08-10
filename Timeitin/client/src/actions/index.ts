@@ -99,3 +99,23 @@ export const updateUser = (userId: string, newUser: UserCreationFormProps) => {
     }
   };
 };
+
+export const setUser = (user: UserCreationFormProps) => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      dispatch({ type: types.SET_USER, payload: user });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const unsetUser = () => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      dispatch({ type: types.UNSET_USER, payload: null });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

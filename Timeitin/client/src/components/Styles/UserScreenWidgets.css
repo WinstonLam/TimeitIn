@@ -1,0 +1,48 @@
+@font-face { font-family: Urbanist-Medium; src: url("./fonts/Urbanist/Urbanist-Medium.otf"); }
+.user-screen-widgets-container {
+    margin-top: 100px;
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+    flex-grow: 2;
+    grid-template-columns: repeat(2, 150px);
+    grid-auto-rows: 120px;
+    grid-column-gap: 40px;
+    grid-row-gap: 50px;
+    }
+
+.widget{
+    font-family: Urbanist-Medium;
+    color: white;
+    width: 100px;
+    height: 120px;
+    border-radius: 2rem;
+    box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
+    -webkit-box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
+    -moz-box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
+}
+
+.widget-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -50px;
+    transform: translateY(-25px);
+}
+.widget-title{
+    font-size: 18px;
+    margin-bottom: 25px;
+    filter: drop-shadow(-2px 3px 2px rgba(0, 0, 0, 0.5));
+}
+
+.widget-icon {
+    fill: white;
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(-2px 3px 2px rgba(0, 0, 0, 0.5));
+}
+
+.widget-description{
+    margin: 10px;
+}

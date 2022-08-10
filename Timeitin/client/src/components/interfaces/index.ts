@@ -81,6 +81,9 @@ export interface ColorPickerProps {
   color?: string;
 }
 
+export interface UserScreenWidgetsProps {
+  options: any;
+}
 // __________________________________________________________________________________
 // redux actions types
 // __________________________________________________________________________________
@@ -97,6 +100,16 @@ interface SignOutAction {
 }
 
 // USER ACTIONS TYPES
+// __________________________________________________________________________________
+interface SetUserAction {
+  type: types.SET_USER;
+  payload: UserCreationFormProps;
+}
+interface UnsetUserAction {
+  type: types.UNSET_USER;
+}
+
+// USERS ACTIONS TYPES
 // __________________________________________________________________________________
 
 interface CreateUserAction {
@@ -141,6 +154,8 @@ interface UpdateAdminAction {
   payload: AdminCreationFormProps;
 }
 export type Action =
+  | SetUserAction
+  | UnsetUserAction
   | SignInAction
   | SignOutAction
   | CreateUserAction
