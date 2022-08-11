@@ -152,3 +152,14 @@ export const FetchDailyHours = (year: String, month: String, day: String) => {
     }
   };
 };
+
+export const setStartingTime = (date: any) => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      const response = await api.setStartingTime(date);
+      dispatch({ type: types.SET_STARTING_TIME, payload: date });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

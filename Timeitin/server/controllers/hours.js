@@ -43,3 +43,14 @@ export const getDailyHours = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const setStartingTime = async (req, res) => {
+  const { year: year, month: month, day: day, startTime: startTime } = req.params;
+  console.log("looking up " + year + " " + month + " " + day);
+  try {
+    const updatedHours = await CreateHours.updateOne({ year: year}, {$push: {month: {day: startTime}}});
+    res.status(200).json(updatedHours);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}

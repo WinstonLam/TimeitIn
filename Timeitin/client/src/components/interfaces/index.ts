@@ -170,6 +170,11 @@ interface FetchDailyHoursAction {
   payload: [{}];
 }
 
+interface SetStartingTime {
+  type: types.SET_STARTING_TIME;
+  payload: {};
+}
+
 export type Action =
   | SetUserAction
   | UnsetUserAction
@@ -186,4 +191,5 @@ export type Action =
   | UpdateAdminAction
   | FetchYearlyHoursAction
   | FetchMonthlyHoursAction
-  | FetchDailyHoursAction;
+  | FetchDailyHoursAction
+  | SetStartingTime;

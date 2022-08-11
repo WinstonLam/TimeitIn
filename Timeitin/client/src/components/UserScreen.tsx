@@ -3,7 +3,7 @@ import { ReactComponent as SmileSVG } from "./images/smile.svg";
 import { useAppDispatch } from "./hooks";
 import { selectedUser, selectHoursYearly } from "./strore";
 import { useSelector } from 'react-redux';
-import { FetchYearlyHours } from "../actions";
+import { FetchYearlyHours, setStartingTime } from "../actions";
 import UserScreenWidgets from "./UserScreenWidgets";
 
 import "./Styles/UserScreen.css";
@@ -19,6 +19,7 @@ const UserScreen = () => {
 
   useEffect(() => { setUser((fetchedUser)[0]); }, [fetchedUser]);
   useEffect(() => { dispatch(FetchYearlyHours("2022")); }, [dispatch]);
+  useEffect(() => { dispatch(setStartingTime({ year: "2022", month: "01", day: "01", startTime: "13:00" })); }, [dispatch]);
 
   // Check if user has been fetched yet
   if (!user) return null;
