@@ -119,3 +119,36 @@ export const unsetUser = () => {
     }
   };
 };
+
+export const FetchYearlyHours = (year: String) => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      const response = await api.getYearlyHours(year);
+      dispatch({ type: types.FETCH_YEARLY_HOURS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const FetchMonthlyHours = (year: String, month: String) => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      const response = await api.getMonthlyHours(year, month);
+      dispatch({ type: types.FETCH_MONTHLY_HOURS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const FetchDailyHours = (year: String, month: String, day: String) => {
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      const response = await api.getDailyHours(year, month, day);
+      dispatch({ type: types.FETCH_DAILY_HOURS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

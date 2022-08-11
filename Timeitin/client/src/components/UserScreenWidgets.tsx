@@ -8,20 +8,17 @@ import "./Styles/UserScreenWidgets.css";
 
 
 const UserScreenWidgets = (options: UserScreenWidgetsProps) => {
-    const date = new Date();
-    const dateOptions: any = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const [widgets, setWidgets] = useState([
         { title: "Start Time", icon: <TimeSVG className="widget-icon" />, description: options.time },
         { title: "End Time", icon: <TimeSVG className="widget-icon" />, description: "" },
-        { title: "Date", icon: <CalenderSVG className="widget-icon" />, description: date.toLocaleDateString("nl-NL", dateOptions) }
+        { title: "Date", icon: <CalenderSVG className="widget-icon" />, description: options.date }
     ]);
-
     return (
         <>
             <div className="user-screen-widgets-container">
                 {widgets.map((widget) => {
                     return (
-                        <div className={`widget ${widget.title}`}>
+                        <div key={`${widget.title}`} className={`widget ${widget.title}`}>
                             <div className="widget-content">
                                 <div className="widget-title">{widget.title}</div>
                                 <div className="widget-icons">{widget.icon}</div>

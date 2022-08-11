@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import getUsers from "./routes/users.js";
 import getAdmin from "./routes/admin.js";
+import getHours from "./routes/hours.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use("/admin", getAdmin);
 app.use("/users", getUsers);
+app.use("/hours", getHours);
 
 const CONNECTION_URL =
   "mongodb+srv://winston:L5JiMIxOUpMNuWFR@timitin.8kovydu.mongodb.net/?retryWrites=true&w=majority";

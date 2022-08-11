@@ -82,7 +82,8 @@ export interface ColorPickerProps {
 }
 
 export interface UserScreenWidgetsProps {
-  options: any;
+  time?: string | null;
+  date?: string | null;
 }
 // __________________________________________________________________________________
 // redux actions types
@@ -153,6 +154,22 @@ interface UpdateAdminAction {
   type: types.EDIT_ADMIN;
   payload: AdminCreationFormProps;
 }
+
+// HOURS ACTIONS TYPES
+// __________________________________________________________________________________
+interface FetchYearlyHoursAction {
+  type: types.FETCH_YEARLY_HOURS;
+  payload: [{}];
+}
+interface FetchMonthlyHoursAction {
+  type: types.FETCH_MONTHLY_HOURS;
+  payload: [{}];
+}
+interface FetchDailyHoursAction {
+  type: types.FETCH_DAILY_HOURS;
+  payload: [{}];
+}
+
 export type Action =
   | SetUserAction
   | UnsetUserAction
@@ -166,4 +183,7 @@ export type Action =
   | CreateAdminAction
   | FetchAdminAction
   | DeleteAdminAction
-  | UpdateAdminAction;
+  | UpdateAdminAction
+  | FetchYearlyHoursAction
+  | FetchMonthlyHoursAction
+  | FetchDailyHoursAction;

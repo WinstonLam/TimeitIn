@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as SmileSVG } from "./images/smile.svg";
-import { selectedUser } from "./strore";
+import { useAppDispatch } from "./hooks";
+import { selectedUser, selectHoursYearly } from "./strore";
 import { useSelector } from 'react-redux';
+import { FetchYearlyHours } from "../actions";
 import UserScreenWidgets from "./UserScreenWidgets";
 
 import "./Styles/UserScreen.css";
 
 const UserScreen = () => {
+  const dispatch = useAppDispatch();
   const [user, setUser] = useState(null);
   const fetchedUser: any = useSelector(selectedUser);
-  useEffect(() => {
-    setUser((fetchedUser)[0]);
-  }, [fetchedUser]);
+  const hoursYearly: any = useSelector(selectHoursYearly);
+  const date = new Date();
+  const dateOptions: any = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const timeOptions: any = { hour: '2-digit', minute: '2-digit' };
+
+  useEffect(() => { setUser((fetchedUser)[0]); }, [fetchedUser]);
+  useEffect(() => { dispatch(FetchYearlyHours("2022")); }, [dispatch]);
 
   // Check if user has been fetched yet
   if (!user) return null;
-
+  console.log(hoursYearly);
 
 
   return (
@@ -29,7 +36,7 @@ const UserScreen = () => {
         </div>
         <SmileSVG className='info-card-img' />
       </div>
-      <UserScreenWidgets options={{ time: new Date() }} />
+      <UserScreenWidgets {...{ time: date.toLocaleTimeString([], timeOptions), date: date.toLocaleDateString("nl-NL", dateOptions) }} />
 
     </div>
   );

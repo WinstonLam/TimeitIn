@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import CreateAdmin from "../models/createAdmin.js";
 
 export const getAdmin = async (req, res) => {
