@@ -12,6 +12,6 @@ const router = express.Router();
 router.get("/", getHours);
 router.get("/:year", getYearlyHours);
 router.get("/:year:month", getMonthlyHours);
-router.get("/:year:month:day", getDailyHours);
-router.post("/:year:month:day:startTime", setStartingTime);
+router.get("/:year/:month/:day", getDailyHours);
+router.post("/:year/:month/:day/:startTime/:name", setStartingTime);
 export default router;

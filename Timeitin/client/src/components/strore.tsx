@@ -22,9 +22,11 @@ export type RootState = ReturnType<typeof store.getState>;
 export const selectUsers = (state: RootState) => state.users;
 export const selectAdmin = (state: RootState) => state.admin;
 export const selectedUser = (state: RootState) => state.selectedUser;
+export const selectHoursDaily = (state: RootState) => state.hoursDaily;
+
+// Select hours yearly and monthly are admin features whcih are not yet implemented
 export const selectHoursYearly = (state: RootState) => state.hoursYearly;
 export const selectHoursMonthly = (state: RootState) => state.hoursMonthly;
-export const selectHoursDaily = (state: RootState) => state.hoursDaily;
 
 
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

@@ -120,7 +120,7 @@ export const unsetUser = () => {
   };
 };
 
-export const FetchYearlyHours = (year: String) => {
+export const fetchYearlyHours = (year: String) => {
   return async function (dispatch: Dispatch<Action>) {
     try {
       const response = await api.getYearlyHours(year);
@@ -131,7 +131,7 @@ export const FetchYearlyHours = (year: String) => {
   };
 };
 
-export const FetchMonthlyHours = (year: String, month: String) => {
+export const fetchMonthlyHours = (year: String, month: String) => {
   return async function (dispatch: Dispatch<Action>) {
     try {
       const response = await api.getMonthlyHours(year, month);
@@ -142,7 +142,7 @@ export const FetchMonthlyHours = (year: String, month: String) => {
   };
 };
 
-export const FetchDailyHours = (year: String, month: String, day: String) => {
+export const fetchDailyHours = (year: String, month: String, day: String) => {
   return async function (dispatch: Dispatch<Action>) {
     try {
       const response = await api.getDailyHours(year, month, day);
@@ -162,4 +162,4 @@ export const setStartingTime = (date: any) => {
       console.log(error);
     }
   };
-}
+};
