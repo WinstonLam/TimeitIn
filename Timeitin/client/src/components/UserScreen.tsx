@@ -26,11 +26,6 @@ const UserScreen = () => {
     startTime: date.toLocaleTimeString([], timeOptions)
   }
 
-  const filterHours = (hours: any, name: String) => {
-    Object.keys(hours).filter(key => name.includes(key))
-      .reduce((obj: any, key) => { obj[key] = hours[key]; return obj; }, {});
-  }
-
 
   useEffect(() => { setUser((fetchedUser)[0]); }, [fetchedUser]);
   useEffect(() => {
@@ -43,7 +38,8 @@ const UserScreen = () => {
   }, [fetchedHours]);
   useEffect(() => { dispatch(fetchDailyHours(settingDate.year, settingDate.month, settingDate.day)); }, [dispatch]);
   useEffect(() => {
-    if (user) {
+    // Set the time only if user has been fetched and no starting time has been set
+    if (user && (hours && !hours[user.firstname] )) {
       dispatch(setStartingTime({
         year: settingDate.year,
         month: settingDate.month,
@@ -52,12 +48,11 @@ const UserScreen = () => {
         name: user.firstname
       }))
     };
-  }, [dispatch, user]);
+  }, [dispatch, user, hours]);
 
   // Check if user has been fetched yet
-  if (!user || !hours) return null;
+  if (!user || (hours && !hours[user.firstname] )) return null;
 
-  console.log(filterHours(hours, user.firstname));
 
   return (
     <div className='userscreen-container'>
@@ -71,7 +66,7 @@ const UserScreen = () => {
         <SmileSVG className='info-card-img' />
       </div>
       <UserScreenWidgets {...{
-        time: settingDate.startTime,
+        time: hours[user.firstname] ? hours[user.firstname].startTime : null,
         date: `${settingDate.day}-${settingDate.month}-${settingDate.year}`
       }} />
 

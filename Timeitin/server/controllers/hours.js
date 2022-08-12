@@ -54,10 +54,10 @@ export const setStartingTime = async (req, res) => {
   console.table([name, startTime, `${day}-${month}-${year}`]);
 
   try {
-    const field = `months.${month}.${day}`;
+    const field = `months.${month}.${day}.${name}`;
     const updatedHours = await CreateHours.updateOne(
       { year: year },
-      { $set: { [field]: { [name]: { startTime } } } }
+      { $set: { [field]:  {startTime}  } }
     );
     res.status(200).json(updatedHours);
   } catch (error) {
