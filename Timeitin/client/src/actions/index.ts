@@ -6,6 +6,7 @@ import {
   UserCreationFormProps,
   AdminCreationFormProps,
 } from "../components/interfaces";
+import getDate from "../components/getDate";
 
 // import history from "../";
 
@@ -142,10 +143,15 @@ export const fetchMonthlyHours = (year: String, month: String) => {
   };
 };
 
-export const fetchDailyHours = (year: String, month: String, day: String) => {
+export const fetchDailyHours = (date: Date) => {
+  const settingDate = getDate(date);
   return async function (dispatch: Dispatch<Action>) {
     try {
-      const response = await api.getDailyHours(year, month, day);
+      const response = await api.getDailyHours(
+        settingDate.year,
+        settingDate.month,
+        settingDate.day
+      );
       dispatch({ type: types.FETCH_DAILY_HOURS, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -153,11 +159,17 @@ export const fetchDailyHours = (year: String, month: String, day: String) => {
   };
 };
 
-export const setStartingTime = (date: any) => {
+export const setTime = (date: Date, username: String, time?: Object) => {
+  const settingDate = getDate(date);
   return async function (dispatch: Dispatch<Action>) {
     try {
-      const response = await api.setStartingTime(date);
-      dispatch({ type: types.SET_STARTING_TIME, payload: date });
+      if (time) {
+        await api.setEndingTime(settingDate, username, time);
+        dispatch({ type: types.SET_ENDING_TIME, payload: settingDate });
+      } else {
+        await api.setStartingTime(settingDate, username);
+        dispatch({ type: types.SET_STARTING_TIME, payload: settingDate });
+      }
     } catch (error) {
       console.log(error);
     }

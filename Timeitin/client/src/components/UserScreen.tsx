@@ -3,8 +3,10 @@ import { ReactComponent as SmileSVG } from "./images/smile.svg";
 import { useAppDispatch } from "./hooks";
 import { selectedUser, selectHoursDaily } from "./strore";
 import { useSelector } from 'react-redux';
-import { fetchDailyHours, setStartingTime } from "../actions";
+import { fetchDailyHours, setTime } from "../actions";
 import UserScreenWidgets from "./UserScreenWidgets";
+import Button from './Button';
+import getDate from './getDate';
 
 import "./Styles/UserScreen.css";
 
@@ -15,44 +17,39 @@ const UserScreen = () => {
   const fetchedUser: any = useSelector(selectedUser);
   const fetchedHours: any = useSelector(selectHoursDaily);
   const date = new Date();
-
-  // const dateOptions: any = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  const timeOptions: any = { hour: '2-digit', minute: '2-digit' };
-
-  const settingDate = {
-    year: date.getFullYear().toString(),
-    month: (date.getMonth() + 1).toString(),
-    day: date.getDate().toString(),
-    startTime: date.toLocaleTimeString([], timeOptions)
-  }
-
+  const today = getDate(date);
 
   useEffect(() => { setUser((fetchedUser)[0]); }, [fetchedUser]);
+  useEffect(() => { dispatch(fetchDailyHours(date)); }, [dispatch]);
   useEffect(() => {
     // this useEffect is to destructure the fetchedHours object and store them in hours
-    const month = settingDate.month;
-    const day = settingDate.day;
     if (fetchedHours.length > 0) {
-      setHours((fetchedHours)[0].months[month][day]);
+      // if for the current day there are no hours registered yet, then set hours without month value
+      if (fetchedHours[0]["months"] === undefined) {
+        setHours(fetchedHours[0]);
+      } else {
+        setHours((fetchedHours)[0].months[today.month][today.day]);
+      }
     }
   }, [fetchedHours]);
-  useEffect(() => { dispatch(fetchDailyHours(settingDate.year, settingDate.month, settingDate.day)); }, [dispatch]);
   useEffect(() => {
     // Set the time only if user has been fetched and no starting time has been set
-    if (user && (hours && !hours[user.firstname] )) {
-      dispatch(setStartingTime({
-        year: settingDate.year,
-        month: settingDate.month,
-        day: settingDate.day,
-        startTime: settingDate.startTime,
-        name: user.firstname
-      }))
+    if (user && (hours && !hours[user.firstname])) {
+      dispatch(setTime(date, user.firstname));
+      if (!hours.hasOwnProperty("months")) {
+        dispatch(fetchDailyHours(date));
+      }
     };
   }, [dispatch, user, hours]);
 
-  // Check if user has been fetched yet
-  if (!user || (hours && !hours[user.firstname] )) return null;
+  // Time out button handler
+  const handleTimeOut = () => {
+    console.log("Time out");
+  }
 
+
+  // Check if user has been fetched yet
+  if (!user || !hours || (hours && !hours[user.firstname])) return null;
 
   return (
     <div className='userscreen-container'>
@@ -66,12 +63,16 @@ const UserScreen = () => {
         <SmileSVG className='info-card-img' />
       </div>
       <UserScreenWidgets {...{
-        time: hours[user.firstname] ? hours[user.firstname].startTime : null,
-        date: `${settingDate.day}-${settingDate.month}-${settingDate.year}`
+        time: hours[user.firstname].startTime,
+        date: `${today.day}-${today.month}-${today.year}`
       }} />
+      <div className='user-logout'>
+        <Button textColor='white' bgColor="red" text="Time me Out" onClick={handleTimeOut} />
+      </div>
 
     </div>
   );
 }
+
 
 export default UserScreen;

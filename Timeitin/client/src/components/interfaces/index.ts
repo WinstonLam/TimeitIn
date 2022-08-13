@@ -175,6 +175,11 @@ interface SetStartingTime {
   payload: {};
 }
 
+interface SetEndingTime {
+  type: types.SET_ENDING_TIME;
+  payload: {};
+}
+
 export type Action =
   | SetUserAction
   | UnsetUserAction
@@ -192,4 +197,5 @@ export type Action =
   | FetchYearlyHoursAction
   | FetchMonthlyHoursAction
   | FetchDailyHoursAction
-  | SetStartingTime;
+  | SetStartingTime
+  | SetEndingTime;
