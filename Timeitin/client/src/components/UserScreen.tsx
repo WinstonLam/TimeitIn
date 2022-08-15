@@ -44,16 +44,20 @@ const UserScreen = () => {
 
   // Time out button handler
   const handleTimeOut = () => {
+    const time = hours[user.firstname].time.split(",");
     const endTime = getDate(date).time;
-    const time = [hours[user.firstname].time, endTime];
-    
-    dispatch(setTime(date, user.firstname, time));
+    const newTime = [hours[user.firstname].time, endTime];
+
+    // If user is timed out already, then do nothing
+    if (time.length < 2) {
+      dispatch(setTime(date, user.firstname, newTime));
+      dispatch(fetchDailyHours(date))
+    }
   }
-  
 
   // Check if user has been fetched yet
   if (!user || !hours || (hours && !hours[user.firstname])) return null;
-  console.log((hours[user.firstname].time).length);
+
   return (
     <div className='userscreen-container'>
       <div className='info-card-container'>

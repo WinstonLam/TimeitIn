@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ReactComponent as TimeSVG } from "./images/widgetIcons/time.svg";
 import { ReactComponent as CalenderSVG } from "./images/widgetIcons/calendar.svg";
-
 import { UserScreenWidgetsProps } from "./interfaces";
 import "./Styles/UserScreenWidgets.css";
 
 
 
 const UserScreenWidgets = (options: UserScreenWidgetsProps) => {
+
     const [widgets, setWidgets] = useState([
-        { title: "Start Time", icon: <TimeSVG className="widget-icon" />, description: options.time },
+        { title: "Start Time", icon: <TimeSVG className="widget-icon" />, description: "" },
         { title: "End Time", icon: <TimeSVG className="widget-icon" />, description: "" },
         { title: "Date", icon: <CalenderSVG className="widget-icon" />, description: options.date }
     ]);
+
+    useEffect(() => {
+        // split the time string into an array of start and end time
+        const splitTime = options.time.split(",");
+
+        setWidgets(widgets.map(widget => {
+            if (widget.title === "Start Time") {
+                widget.description = splitTime[0];
+            }
+            if (widget.title === "End Time") {
+                widget.description = splitTime[1];
+            }
+            return widget;
+        }))
+    }, [options])
+
+
     return (
         <>
             <div className="user-screen-widgets-container">
