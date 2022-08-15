@@ -20,8 +20,6 @@ export const getYearlyHours = (year: String) => axios.get(`${hours}/${year}`);
 export const getMonthlyHours = (year: String, month: String) => axios.get(`${hours}/${year}/${month}`);
 export const getDailyHours = (year: String, month: String, day: String) => axios.get(`${hours}/${year}/${month}/${day}`);
 export const setStartingTime = (date: any, name: any) =>
-    axios.post(`${hours}/${date.year}/${date.month}/${date.day}/${date.startTime}/${name}`
-        , date, name);
+    axios.post(`${hours}/${date.year}/${date.month}/${date.day}/${date.time}/${name}`);
 export const setEndingTime = (date: any, name: any, time: any) =>
-    axios.post(`${hours}/${date.year}/${date.month}/${date.day}/${date.startTime}/${name}/${time}`
-        , date, time);
+    axios.post(`${hours}/${date.year}/${date.month}/${date.day}/${time}/${name}`);

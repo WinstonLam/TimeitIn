@@ -44,13 +44,16 @@ const UserScreen = () => {
 
   // Time out button handler
   const handleTimeOut = () => {
-    console.log("Time out");
+    const endTime = getDate(date).time;
+    const time = [hours[user.firstname].time, endTime];
+    
+    dispatch(setTime(date, user.firstname, time));
   }
-
+  
 
   // Check if user has been fetched yet
   if (!user || !hours || (hours && !hours[user.firstname])) return null;
-
+  console.log((hours[user.firstname].time).length);
   return (
     <div className='userscreen-container'>
       <div className='info-card-container'>
@@ -63,7 +66,7 @@ const UserScreen = () => {
         <SmileSVG className='info-card-img' />
       </div>
       <UserScreenWidgets {...{
-        time: hours[user.firstname].startTime,
+        time: hours[user.firstname].time,
         date: `${today.day}-${today.month}-${today.year}`
       }} />
       <div className='user-logout'>

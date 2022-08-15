@@ -47,17 +47,40 @@ export const setStartingTime = async (req, res) => {
     year: year,
     month: month,
     day: day,
-    startTime: startTime,
+    time: time,
     name: name,
   } = req.params;
 
-  console.table([name, startTime, `${day}-${month}-${year}`]);
+  console.table([name, time, `${day}-${month}-${year}`]);
 
   try {
     const field = `months.${month}.${day}.${name}`;
     const updatedHours = await CreateHours.updateOne(
       { year: year },
-      { $set: { [field]:  {startTime}  } }
+      { $set: { [field]:  {time}  } }
+    );
+    res.status(200).json(updatedHours);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const setEndingtime = async (req, res) => {
+  const {
+    year: year,
+    month: month,
+    day: day,
+    time: time,
+    name: name,
+  } = req.params;
+
+  console.table([name, time, `${day}-${month}-${year}`]);
+
+  try {
+    const field = `months.${month}.${day}.${name}`;
+    const updatedHours = await CreateHours.updateOne(
+      { year: year },
+      { $set: { [field]:  {time}  } }
     );
     res.status(200).json(updatedHours);
   } catch (error) {
