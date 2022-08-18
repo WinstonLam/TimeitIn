@@ -5,6 +5,8 @@ import cors from "cors";
 import getUsers from "./routes/users.js";
 import getAdmin from "./routes/admin.js";
 import getHours from "./routes/hours.js";
+import  {NAME, KEY} from "./connectionUrl.js";
+
 
 const app = express();
 
@@ -17,7 +19,7 @@ app.use("/users", getUsers);
 app.use("/hours", getHours);
 
 const CONNECTION_URL =
-  "mongodb+srv://winston:L5JiMIxOUpMNuWFR@timitin.8kovydu.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://"+ NAME + ":" + KEY + "@timitin.8kovydu.mongodb.net/?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose
