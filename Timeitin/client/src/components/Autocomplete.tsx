@@ -51,10 +51,10 @@ const AutoComplete = (props: { options: Array<any>, setValue: any }) => {
 
         <div className="input-container"
         // Use mouse events to decide if input is focussed or not
-
+        onMouseLeave={handleMouseLeave}
         >
             <label>
-                <div>
+                <div className="auto-complete-wrapper">
                     <input className={`auto-complete ${inputState.show ? "show" : ""}`}
                         value={inputState.value}
                         type="text"
@@ -64,10 +64,13 @@ const AutoComplete = (props: { options: Array<any>, setValue: any }) => {
                         onClick={handleOnClick}
                         onChange={handleChange} />
                 </div>
+             
                 <span className={`label ${inputState.value ? "show" : ""}`} >Select your name</span>
                 <Dropdown className={`dropdown-icon ${inputState.show ? "show" : ""}`} />
 
-                <div onBlur={handleMouseLeave} className={`options-wrapper ${inputState.show ? "show" : ""}`} >
+                <div className={`options-wrapper ${inputState.show ? "show" : ""}`}
+                onBlur={handleMouseLeave}
+                onMouseLeave={handleMouseLeave}>
                     <div className="options">
                         {optionList.filter((option) => {
                             const searchTerm = inputState.value.toLowerCase();
