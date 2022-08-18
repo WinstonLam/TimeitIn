@@ -12,6 +12,7 @@ const AutoComplete = (props: { options: Array<any>, setValue: any }) => {
         selection: false,
         show: false
     });
+    const [mouseLeave, setMouseLeave] = useState(true);
     const optionList = (Object.values(props.options))
 
 
@@ -43,15 +44,14 @@ const AutoComplete = (props: { options: Array<any>, setValue: any }) => {
         props.setValue(option)
     }
 
-    const handleMouseLeave = () => {
-        setInputState({ ...inputState, focus: false })
+    const handleBlur = () => {
+        if (mouseLeave) setInputState({ ...inputState, focus: false })
     }
 
-    return (
 
+    return (
         <div className="input-container"
         // Use mouse events to decide if input is focussed or not
-        onMouseLeave={handleMouseLeave}
         >
             <label>
                 <div className="auto-complete-wrapper">
@@ -62,15 +62,15 @@ const AutoComplete = (props: { options: Array<any>, setValue: any }) => {
                         name="name"
                         onAnimationStart={handleAutoFill}
                         onClick={handleOnClick}
+                        onBlur={handleBlur}
                         onChange={handleChange} />
                 </div>
-             
                 <span className={`label ${inputState.value ? "show" : ""}`} >Select your name</span>
                 <Dropdown className={`dropdown-icon ${inputState.show ? "show" : ""}`} />
 
                 <div className={`options-wrapper ${inputState.show ? "show" : ""}`}
-                onBlur={handleMouseLeave}
-                onMouseLeave={handleMouseLeave}>
+                    onMouseLeave={() => setMouseLeave(true)}
+                    onMouseEnter={() => setMouseLeave(false)}>
                     <div className="options">
                         {optionList.filter((option) => {
                             const searchTerm = inputState.value.toLowerCase();

@@ -35,12 +35,29 @@
 .info-card-title {
     font-size: 3rem;
 }
+
+.info-card-icons{
+    position: absolute;
+    top: 25%;
+}
 .info-card-img{
-    position: relative;
-    top: -95%;
     width: 100px;
     height: 100px;
     fill: white;
+}
+.info-card-img.bye{
+    top: -80%;
+    left: 80%;
+    position: absolute;
+    visibility: visible;
+    opacity:1;
+    transition: visibility 0.3s linear,opacity 0.3s linear;
+}
+
+.info-card-img.bye.hidden{
+    visibility: hidden;
+    opacity:0;
+
 }
 
 .user-logout{
@@ -49,4 +66,17 @@
     right: 3px;
     padding: 10px;
     cursor: pointer;
+}
+
+.logout-message{
+    display: flex;
+    font-family: Urbanist-Medium;
+    align-items: center;
+}
+.counter{
+    font-size: 30px;
+    color: #1976d2;
+    position: absolute;
+    top: 35%;
+    left: 78%;
 }
