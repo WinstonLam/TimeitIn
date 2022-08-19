@@ -1,7 +1,8 @@
 @font-face { font-family: Urbanist-Medium; src: url("./fonts/Urbanist/Urbanist-Medium.otf"); }
 .user-screen-widgets-container {
-    margin-top: 100px;
     display: grid;
+    height: 80%;
+    align-content: center;
     justify-items: center;
     justify-content: center;
     flex-grow: 2;

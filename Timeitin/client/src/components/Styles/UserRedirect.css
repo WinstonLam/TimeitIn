@@ -1,0 +1,66 @@
+.redirect-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.redirect-inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 50px;
+    border-radius: 2rem;
+    box-shadow: -7px 15px 21px 8px rgb(196 174 143 / 84%);
+    -webkit-box-shadow: -7px 15px 21px 8px rgb(196 174 143 / 84%);
+    -moz-box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
+}
+
+.redirect-message{
+    font-family: Urbanist-Medium;
+    text-align: center;
+    width: 410px;
+    font-size: 2rem;
+    color: white;
+}
+
+.redirect-message a{
+    font-family: Urbanist-Medium;
+    text-align: center;
+    font-size: 2rem;
+    color: #1976d2;
+    cursor: pointer;
+}
+
+.redirect-message a:hover{
+    color: white;
+}
+.redirect-counter-container{
+    margin-top: -20px;
+}
+.redirect-counter-404{
+    position: relative;
+    left: 40px;
+    top: 65px;
+    font-family: Urbanist-Medium;
+    font-size: 2rem;
+    color: #1976d2;
+}
+
+.redirect-icon-container{
+    position: relative;
+    top: -410px;
+    height: 0px;
+}
+.redirect-icon{
+    width: 100px;
+    fill: white;
+}
+.redirect-icon.question{
+    position: absolute;
+    left: 74px;
+    top: -85px;
+}

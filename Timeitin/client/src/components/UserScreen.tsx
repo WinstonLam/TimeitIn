@@ -25,16 +25,19 @@ const UserScreen = () => {
   const date = new Date();
   const today = getDate(date);
 
-  useEffect(() => { setUser((fetchedUser)[0]); }, [fetchedUser]);
+
   useEffect(() => { dispatch(fetchDailyHours(date)); }, [dispatch]);
+
   useEffect(() => {
-    if (timedOut) {
-      counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-    }
-    if (counter === 0) {
-      navigate("/");
-    }
+    if (fetchedUser.length === 0) navigate("/user/404")
+    setUser((fetchedUser)[0]);
+  }, [fetchedUser]);
+
+  useEffect(() => {
+    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    if (counter === 0) navigate("/");
   }, [counter, timedOut]);
+
   useEffect(() => {
     if (user && hours.hasOwnProperty(user.firstname)) {
       const time = hours[user.firstname].time.split(",").length;
@@ -43,6 +46,7 @@ const UserScreen = () => {
       }
     }
   }, [hours]);
+
   useEffect(() => {
     // this useEffect is to destructure the fetchedHours object and store them in hours
     if (fetchedHours.length > 0) {
@@ -70,6 +74,7 @@ const UserScreen = () => {
     const endTime = getDate(date).time;
     const newTime = [hours[user.firstname].time, endTime];
     // If user is timed out already, then do nothing
+
     if (time.length < 2) {
       dispatch(setTime(date, user.firstname, newTime));
       dispatch(fetchDailyHours(date))
@@ -77,52 +82,49 @@ const UserScreen = () => {
     }
   }
 
-
   // Check if user has been fetched yet
   if (!user || !hours || (hours && !hours[user.firstname])) return null;
-
 
   return (
     <div className='userscreen-container'>
       <div className='info-card-container'>
-
-        <div className='info-card-text'>
-          {timedOut ?
-            <>
-              <span className='info-card-title'>Goodbye<span style={{ color: "#1976d2" }}> {user.firstname}</span></span>
-              <p>You have been <span style={{ color: "#1976d2" }}>timed out </span>for today<br /> Thanks for working and see you next time</p>
-            </>
-            :
-            <>
-              <span className='info-card-title'>Welcome<span style={{ color: "#1976d2" }}> {user.firstname}</span></span>
-              <p>You have been <span style={{ color: "#1976d2" }}>timed in </span>for today<br /> Here is your info for today's shift</p>
-            </>
-          }
+        <div className='info-card'>
+          <div className='info-card-text'>
+            {timedOut ?
+              <>
+                <span className='info-card-title'>Goodbye<span style={{ color: "#1976d2" }}> {user.firstname}</span></span>
+                <p>You have been <span style={{ color: "#1976d2" }}>timed out </span>for today<br /> Thanks for working and see you next time</p>
+              </>
+              :
+              <>
+                <span className='info-card-title'>Welcome<span style={{ color: "#1976d2" }}> {user.firstname}</span></span>
+                <p>You have been <span style={{ color: "#1976d2" }}>timed in </span>for today<br /> Here is your info for today's shift</p>
+              </>
+            }
+          </div>
+          <div className='info-card-icons'>
+            <SmileSVG className='info-card-img' />
+            <ByeSVG className={`info-card-img bye ${timedOut ? "" : "hidden"}`} />
+          </div>
         </div>
-        <div className='info-card-icons'>
-          <SmileSVG className='info-card-img' />
-          <ByeSVG className={`info-card-img bye ${timedOut ? "" : "hidden"}`} />
-        </div>
-
       </div>
       <UserScreenWidgets {...{
         time: hours[user.firstname].time,
         date: `${today.day}-${today.month}-${today.year}`
       }} />
-      <div className='user-logout'>
-        {timedOut ?
-          <>
-            <div className='logout-message'>
-              <div className='redirect-text'>Redirecting to home page in: </div>
-              <div>
-                <RevolvingDot color="#1976d2" />
-                <div className='counter'>{counter}</div>
-              </div>
-            </div>
+      <div className='logout-message'>
+        <div className='redirect-text'>Redirecting to
+          <a className='redirect-link' href="/"><u>home page</u></a>
+          in: </div>
+        <div className='redirect-counter'>
+          <RevolvingDot color="#1976d2" />
+          <div className='counter'>{counter}</div>
+        </div>
+      </div>
 
-          </> : <Button textColor='white' bgColor="red" text="Time me Out" onClick={handleTimeOut} />
-        }
 
+      <div className={`user-logout ${timedOut ? "hidden" : ""}`} >
+        <Button textColor='white' bgColor="red" text="Time me Out" onClick={handleTimeOut} />
       </div>
 
     </div>
