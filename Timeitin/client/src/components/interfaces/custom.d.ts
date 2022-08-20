@@ -2,6 +2,17 @@ declare module "*.png" {
   const value: any;
   export = value;
 }
+
+declare module "*.jpg" {
+  const value: any;
+  export = value;
+}
+
+declare module "*.gif" {
+  const value: any;
+  export = value;
+}
+
 declare module "*.svg" {
   import React = require("react");
   export const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -9,5 +20,5 @@ declare module "*.svg" {
   export default src;
 }
 
-declare module '@mui/icons-material/VisibilityOff';
-declare module '@mui/icons-material/Visibility';
+declare module "@mui/icons-material/VisibilityOff";
+declare module "@mui/icons-material/Visibility";

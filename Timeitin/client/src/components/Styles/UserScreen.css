@@ -6,6 +6,7 @@
     height: 100vh;
     min-height: 800px;
     max-width: 1060px;
+    min-width: 820px;
 }
 
 .info-card-container{
