@@ -1,0 +1,46 @@
+.option-picker-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 5%;
+}
+
+.option-picker-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 2rem;
+}
+
+.option-picker{
+    font-family: Urbanist-Medium;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.options-picker-item{
+    z-index: 1;
+}
+
+.option-picker-selector{
+    position: absolute;
+    z-index: -1;
+    height: 50px;
+    display: flex;
+    border-radius: 2rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: red;
+}

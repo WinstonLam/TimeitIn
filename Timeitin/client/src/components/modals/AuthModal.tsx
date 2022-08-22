@@ -3,7 +3,6 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { selectAdmin } from "../strore";
 import { useAppDispatch } from "../hooks";
-import { fetchAdmin } from "../../actions";
 import Modal from './ModalTemplate';
 import { PinInput } from 'react-input-pin-code';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -22,7 +21,6 @@ interface UserAuthModalProps {
 
 const AuthModal: FunctionComponent<UserAuthModalProps> = ({ currentPath, onAuthorization, successAuthPath, setOnAuthorization }) => {
     let navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const fetchedAdmin: any = useSelector(selectAdmin);
     const [showModal, setShowModal] = useState(onAuthorization);
     const [admin, setAdmin] = useState(null);
@@ -30,7 +28,6 @@ const AuthModal: FunctionComponent<UserAuthModalProps> = ({ currentPath, onAutho
     const [pin, setPin] = useState(['', '', '', '', '']);
     const [pinError, setPinError] = useState({ message: "", color: "" });
 
-    useEffect(() => { dispatch(fetchAdmin()) }, [dispatch]);
     useEffect(() => { setAdmin(fetchedAdmin[0]) }, [fetchedAdmin]);
     useEffect(() => {
         if (admin) {

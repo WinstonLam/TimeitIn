@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectAdmin } from "./strore";
 import { useAppDispatch } from "./hooks";
-import { fetchAdmin } from "../actions";
+
 import { useNavigate, useLocation } from 'react-router-dom';
 import AuthModal from "./modals/AuthModal";
 import BurgerMenu from "./BurgerMenu";
@@ -18,13 +18,11 @@ const links = ["/users", "/settings"];
 const ResponsiveAppBar = () => {
   let navigate = useNavigate();
   const currentPath = useLocation().pathname;
-  const dispatch = useAppDispatch();
   const fetchedAdmin: any = useSelector(selectAdmin);
   const [admin, setAdmin] = useState(null);
   const [authRequired, setAuthRequired] = useState(false);
   const [navigateTo, setNavigateTo] = useState("");
 
-  useEffect(() => { dispatch(fetchAdmin()) }, [dispatch]);
   useEffect(() => { setAdmin(fetchedAdmin) }, [fetchedAdmin]);
 
   const handleRedirect = (link: string) => {
