@@ -48,7 +48,7 @@ const DailyHours = ({ hours }: any) => {
     } = useTable({ columns, data })
 
     return (
-        <table {...getTableProps()} >
+        <table className="daily-hours-table" {...getTableProps()} >
             <thead>
                 {headerGroups.map(headerGroup => (
                     <>

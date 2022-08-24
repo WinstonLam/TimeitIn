@@ -5,8 +5,11 @@ import { useAppDispatch } from "./hooks";
 import { fetchDailyHours } from "../actions";
 
 import getDate from './getDate';
-import OptionPicker from "./OptionPicker";
+import OptionPicker from "./Inputs/OptionPicker";
+import DateRangePicker from "./Inputs/DateRangePicker";
 import DailyHours from "./HoursSettings/DailyHours";
+
+
 
 import "./Styles/HoursSettings.css";
 
@@ -37,6 +40,7 @@ const HoursSettings = () => {
         <div className="hours-container">
             <div className="hours-inner">
                 <OptionPicker options={["Daily", "Weekly", "Monthly"]} onClick={handleSelection} />
+                <DateRangePicker />
                 <DailyHours hours={hours} />
             </div>
         </div>

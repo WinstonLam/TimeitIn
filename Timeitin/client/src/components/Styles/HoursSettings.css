@@ -15,7 +15,6 @@
     max-width: 1200px;
     width: 90%;
     display: flex;
-    
     flex-direction: column;
     padding: 40px;
     border-radius: 2rem;
@@ -24,10 +23,18 @@
     -moz-box-shadow: -7px 15px 21px 8px rgba(196,174,143,0.84);
 }
 
-.hours-inner hr {
+.daily-hours-table hr {
     margin: 10px;
-    width: 325%;
+    width: 420%;
     border: 0;
     border-top: 1px solid #f7f6f6;
 
+}
+
+.daily-hours-table{
+    width: 100%;
+}
+
+.daily-hours-table thead{
+    width: 100%;
 }
