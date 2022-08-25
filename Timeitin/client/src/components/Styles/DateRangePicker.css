@@ -1,3 +1,22 @@
-.rdrCalendarWrapper{
-    background: transparent !important;
+.date-picker{
+    background: transparent;
+    height: 20px;
+    padding: 10px;
+    border-radius: 2rem;
+}
+
+.date-picker-calendar{
+    background: transparent ;
+    border-radius: 2rem;
+    background-color: white;
+}
+
+.react-datepicker__header{
+    background-color: transparent !important;
+}
+
+.react-datepicker-popper{
+    position: absolute;
+    width: 100%;
+    transform: none;
 }

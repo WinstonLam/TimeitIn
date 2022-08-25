@@ -1,12 +1,11 @@
-import { Translate } from "@mui/icons-material";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 
 import "../Styles/OptionPicker.css";
 
 
 interface OptionPickerProps {
     options: any[];
-    onClick: () => void;
+    onClick: (option: any) => void;
 }
 
 const OptionPicker = ({ options, onClick }: OptionPickerProps) => {
@@ -16,6 +15,10 @@ const OptionPicker = ({ options, onClick }: OptionPickerProps) => {
     const [optionIdx, setOptionIdx] = useState(0);
 
     useLayoutEffect(() => { setWidth(ref.current.offsetWidth) }, [ref]);
+
+    useEffect(() => {
+        onClick(selectedOption);
+    }, [selectedOption]);
 
     const handleSelection = (option: any) => {
         setSelectedOption(option);
@@ -27,6 +30,8 @@ const OptionPicker = ({ options, onClick }: OptionPickerProps) => {
             }
         }
     }
+
+
 
     return (<div className="option-picker-container">
         <div className="option-picker-wrapper" style={{ width: (options.length * width) + "px" }} >
