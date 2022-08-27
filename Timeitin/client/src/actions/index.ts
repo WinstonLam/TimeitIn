@@ -7,6 +7,7 @@ import {
   AdminCreationFormProps,
 } from "../components/interfaces";
 import getDate from "../components/getDate";
+import range from "../components/range";
 
 // import history from "../";
 
@@ -121,28 +122,6 @@ export const unsetUser = () => {
   };
 };
 
-export const fetchYearlyHours = (year: String) => {
-  return async function (dispatch: Dispatch<Action>) {
-    try {
-      const response = await api.getYearlyHours(year);
-      dispatch({ type: types.FETCH_YEARLY_HOURS, payload: response.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const fetchMonthlyHours = (year: String, month: String) => {
-  return async function (dispatch: Dispatch<Action>) {
-    try {
-      const response = await api.getMonthlyHours(year, month);
-      dispatch({ type: types.FETCH_MONTHLY_HOURS, payload: response.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
 export const fetchDailyHours = (date: Date) => {
   const settingDate = getDate(date);
   return async function (dispatch: Dispatch<Action>) {
@@ -153,6 +132,42 @@ export const fetchDailyHours = (date: Date) => {
         settingDate.day
       );
       dispatch({ type: types.FETCH_DAILY_HOURS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const fetchRequestedHours = (date: Date, endDay?: number) => {
+  const settingDate = getDate(date);
+  return async function (dispatch: Dispatch<Action>) {
+    try {
+      let response = null;
+      // if weekly hours are requested, get all the hours from the week
+      if (endDay) {
+        response = await api.getWeeklyHours(
+          settingDate.year,
+          settingDate.month,
+          range(Number(settingDate.day), endDay)
+        );
+      } // if daily hours are requested, get all the hours from the day
+      else if (settingDate.day) {
+        response = await api.getDailyHours(
+          settingDate.year,
+          settingDate.month,
+          settingDate.day
+        );
+      } // if monthly hours are requested, get all the hours from the month
+      else if (settingDate.month) {
+        response = await api.getMonthlyHours(
+          settingDate.year,
+          settingDate.month
+        );
+      } // if yearly hours are requested, get all the hours from the year
+      else if (settingDate.year) {
+        response = await api.getYearlyHours(settingDate.year);
+      }
+      dispatch({ type: types.FETCH_REQUESTED_HOURS, payload: response.data });
     } catch (error) {
       console.log(error);
     }

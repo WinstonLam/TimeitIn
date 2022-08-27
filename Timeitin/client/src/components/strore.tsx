@@ -3,7 +3,7 @@ import authReducer from "./reducers/authReducer";
 import usersReducer from "./reducers/usersReducer";
 import adminReducer from "./reducers/adminReducer";
 import userReducer from "./reducers/userReducer";
-import { hoursYearlyReducer, hoursMonthlyReducer, hoursDailyReducer } from "./reducers/hoursReducer";
+import { hoursRequestedReducer, hoursDailyReducer } from "./reducers/hoursReducer";
 
 const store = configureStore({
   reducer: {
@@ -11,8 +11,7 @@ const store = configureStore({
     auth: authReducer,
     admin: adminReducer,
     selectedUser: userReducer,
-    hoursYearly: hoursYearlyReducer,
-    hoursMonthly: hoursMonthlyReducer,
+    hoursRequested: hoursRequestedReducer,
     hoursDaily: hoursDailyReducer,
   },
 });
@@ -23,10 +22,7 @@ export const selectUsers = (state: RootState) => state.users;
 export const selectAdmin = (state: RootState) => state.admin;
 export const selectedUser = (state: RootState) => state.selectedUser;
 export const selectHoursDaily = (state: RootState) => state.hoursDaily;
-
-// Select hours yearly and monthly are admin features whcih are not yet implemented
-export const selectHoursYearly = (state: RootState) => state.hoursYearly;
-export const selectHoursMonthly = (state: RootState) => state.hoursMonthly;
+export const selectHoursRequested = (state: RootState) => state.hoursRequested;
 
 
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

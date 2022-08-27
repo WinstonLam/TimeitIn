@@ -8,7 +8,6 @@ const DailyHours = ({ hours }: any) => {
     const data = useMemo(() => {
         const list: any = [];
         if (hours) {
-            console.log(hours);
             Object.keys(hours).forEach(function (key) {
                 const time = hours[key].time.split(",");
                 if (time.length < 2) {
@@ -21,7 +20,7 @@ const DailyHours = ({ hours }: any) => {
         return list;
     }, [hours]);
 
-    const columns = React.useMemo(
+    const columns = useMemo(
         () => [
             {
                 Header: 'Name',
@@ -50,9 +49,9 @@ const DailyHours = ({ hours }: any) => {
     return (
         <table className="daily-hours-table" {...getTableProps()} >
             <thead>
-                {headerGroups.map(headerGroup => (
+                {headerGroups.map((headerGroup, idx) => (
                     <>
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <tr key={idx} {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
                                 <th {...column.getHeaderProps()}>
                                     {column.render('Header')}
@@ -64,11 +63,11 @@ const DailyHours = ({ hours }: any) => {
                     </>))}
             </thead>
             <tbody {...getTableBodyProps()}>
-                {rows.map(row => {
+                {rows.map((row, idx) => {
                     prepareRow(row)
                     return (
                         <>
-                            <tr {...row.getRowProps()}>
+                            <tr key={idx} {...row.getRowProps()}>
                                 {row.cells.map(cell => {
                                     return (
                                         <td {...cell.getCellProps()}>

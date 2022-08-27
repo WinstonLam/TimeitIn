@@ -157,12 +157,9 @@ interface UpdateAdminAction {
 
 // HOURS ACTIONS TYPES
 // __________________________________________________________________________________
-interface FetchYearlyHoursAction {
-  type: types.FETCH_YEARLY_HOURS;
-  payload: [{}];
-}
-interface FetchMonthlyHoursAction {
-  type: types.FETCH_MONTHLY_HOURS;
+
+interface FetchRequestedHoursAction {
+  type: types.FETCH_REQUESTED_HOURS;
   payload: [{}];
 }
 interface FetchDailyHoursAction {
@@ -194,8 +191,7 @@ export type Action =
   | FetchAdminAction
   | DeleteAdminAction
   | UpdateAdminAction
-  | FetchYearlyHoursAction
-  | FetchMonthlyHoursAction
+  | FetchRequestedHoursAction
   | FetchDailyHoursAction
   | SetStartingTime
   | SetEndingTime;

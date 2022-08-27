@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from 'react-redux';
-import { selectHoursDaily } from "./strore";
+import { selectHoursRequested } from "./strore";
 import { useAppDispatch } from "./hooks";
-import { fetchDailyHours } from "../actions";
+import { fetchRequestedHours } from "../actions";
 
-import getDate from './getDate';
+
 import OptionPicker from "./Inputs/OptionPicker";
 import WeekPicker from "./Inputs/WeekPicker";
 import DayPicker from "./Inputs/DayPicker";
@@ -12,41 +12,56 @@ import MonthPicker from "./Inputs/MonthsPicker";
 import DailyHours from "./HoursSettings/DailyHours";
 
 
-
 import "./Styles/HoursSettings.css";
 
 const HoursSettings = () => {
     const dispatch = useAppDispatch();
+    const date = new Date();
+
+    const fetchedHours: any = useSelector(selectHoursRequested);
     const [hours, setHours] = useState(null);
     const [displaySelection, setDisplaySelection] = useState("Daily");
-    const fetchedHours: any = useSelector(selectHoursDaily);
-    const date = new Date();
-    const today = getDate(date);
 
+    const [selectedDate, setSelectedDate] = useState({
+        day: date.getDate(),
+        endDay: null,
+        month: date.getMonth(),
+        year: date.getFullYear(),
+    });
+
+    const destructuredDate = useMemo(() => {
+        return new Date(selectedDate.year, selectedDate.month, selectedDate.day);
+    }, [selectedDate]);
 
     useEffect(() => {
+        // initial fetch of hours
         if (fetchedHours.length === 0) {
-            dispatch(fetchDailyHours(date));
+            dispatch(fetchRequestedHours(date));
+        } // if weekly display, then provide end day
+        else if (selectedDate.endDay) {
+            dispatch(fetchRequestedHours(destructuredDate, selectedDate.endDay));
+        } else {
+            dispatch(fetchRequestedHours(destructuredDate));
         }
-    }, [dispatch]);
+    }, [dispatch, destructuredDate]);
 
     useEffect(() => {
         if (fetchedHours.length !== 0 && fetchedHours[0].hasOwnProperty("months")) {
-            setHours((fetchedHours)[0].months[today.month][today.day]);
-        }
+            setHours((fetchedHours)[0].months[selectedDate.month + 1][selectedDate.day]);
+        } else setHours(null)
     }, [fetchedHours]);
 
     const handleSelection = (option: any) => {
         if (option) setDisplaySelection(option);
     }
-
+    console.log(selectedDate.endDay)
     return (
         <div className="hours-container">
             <div className="hours-inner">
                 <OptionPicker options={["Daily", "Weekly", "Monthly"]} onClick={(option) => handleSelection(option)} />
-                {displaySelection === "Daily" && <DayPicker />}
-                {displaySelection === "Weekly" && <WeekPicker />}
-                {displaySelection === "Monthly" && <MonthPicker />}
+                {displaySelection === "Daily" && <DayPicker selectedDate={selectedDate} destructuredDate={destructuredDate} setSelectedDate={setSelectedDate} />}
+                {displaySelection === "Weekly" && <WeekPicker selectedDate={selectedDate} destructuredDate={destructuredDate} setSelectedDate={setSelectedDate} />}
+                {displaySelection === "Monthly" && <MonthPicker selectedDate={selectedDate} destructuredDate={destructuredDate} setSelectedDate={setSelectedDate} />}
                 <DailyHours hours={hours} />
             </div>
         </div>
