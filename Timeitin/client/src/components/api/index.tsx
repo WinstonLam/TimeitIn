@@ -19,7 +19,7 @@ export const deleteUser = (userId: string) => axios.delete(`${users}/${userId}`)
 // User Hours related functions
 export const getYearlyHours = (year: String) => axios.get(`${hours}/${year}`);
 export const getMonthlyHours = (year: String, month: String) => axios.get(`${hours}/${year}/${month}`);
-export const getWeeklyHours = (year: String, month: String, days: any[]) => axios.get(`${hours}/${year}/${month}/${days}`);
+export const getWeeklyHours = (year: String, month: String, days: any[]) => axios.get(`${hours}/${year}/${month}/weeks/${days}`);
 export const getDailyHours = (year: String, month: String, day: String) => axios.get(`${hours}/${year}/${month}/${day}`);
 export const setStartingTime = (date: any, name: any) =>
     axios.post(`${hours}/${date.year}/${date.month}/${date.day}/${date.time}/${name}`);

@@ -9,6 +9,27 @@ export const getHours = async (req, res) => {
   }
 };
 
+export const getWeeklyHours = async (req,res) => {
+  const { year: year, month: month, days: days } = req.params;
+
+  console.log(`fetchin hours of ${month} days: ${days}`);
+  try {
+    console.log("test");
+    const weeklyHours = [];
+    const mapping = days.map(day => {
+      const field = `months.${month}.${day}`;
+      const dailyHours = await CreateHours.find({year: [year]}, {[field]: 1} );
+      weeklyHours.push(dailyHours);
+    })
+    console.log(weeklyHours);
+    // const dailyHours = await CreateHours.find({ year: [year] }, { [field]: 1 });
+    res.status(200).json(weeklyHours);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+
 export const getYearlyHours = async (req, res) => {
   const { year: year } = req.params;
   console.log("looking up " + year, req.params);

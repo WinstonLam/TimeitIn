@@ -4,6 +4,7 @@ import {
   getYearlyHours,
   getMonthlyHours,
   getDailyHours,
+  getWeeklyHours,
   setStartingTime,
   setEndingtime
 } from "../controllers/hours.js";
@@ -14,6 +15,7 @@ router.get("/", getHours);
 router.get("/:year", getYearlyHours);
 router.get("/:year:month", getMonthlyHours);
 router.get("/:year/:month/:day", getDailyHours);
+router.get("/:year/:month/weeks/:days", getWeeklyHours);
 router.post("/:year/:month/:day/:time/:name", setStartingTime);
 router.post("/:year/:month/:day/:time/:name", setEndingtime);
 export default router;
