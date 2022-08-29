@@ -18,7 +18,7 @@ const MonthPicker = ({ destructuredDate, selectedDate, setSelectedDate }: DatePi
             ...selectedDate,
             day: null,
             endDay: null,
-            month: new Date().getMonth(),
+            month: new Date().getMonth() + 1,
             year: new Date().getFullYear()
         })
     }, [])
@@ -27,7 +27,7 @@ const MonthPicker = ({ destructuredDate, selectedDate, setSelectedDate }: DatePi
         <DatePicker
             className="date-picker"
             selected={destructuredDate}
-            onChange={(date) => setSelectedDate({ ...selectedDate, day: null, month: date.getMonth(), year: date.getFullYear() })}
+            onChange={(date) => setSelectedDate({ ...selectedDate, day: null, month: date.getMonth() + 1, year: date.getFullYear() })}
             dateFormat="MM/yyyy"
             showMonthYearPicker
             disabledKeyboardNavigation

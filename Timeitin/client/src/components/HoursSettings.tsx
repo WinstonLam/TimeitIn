@@ -40,21 +40,22 @@ const HoursSettings = () => {
         } // if weekly display, then provide end day
         else if (selectedDate.endDay) {
             dispatch(fetchRequestedHours(destructuredDate, selectedDate.endDay));
-        } else {
-            dispatch(fetchRequestedHours(destructuredDate));
-        }
+        } else if (!selectedDate.day) {
+            dispatch(fetchRequestedHours(destructuredDate, null, true));
+        } else { dispatch(fetchRequestedHours(destructuredDate)); }
     }, [dispatch, destructuredDate]);
 
     useEffect(() => {
         if (fetchedHours.length !== 0 && fetchedHours[0].hasOwnProperty("months")) {
-            setHours((fetchedHours)[0].months[selectedDate.month + 1][selectedDate.day]);
+            if (selectedDate.day) setHours((fetchedHours)[0].months[selectedDate.month + 1][selectedDate.day]);
+            else setHours((fetchedHours)[0].months[selectedDate.month + 1]);
         } else setHours(null)
     }, [fetchedHours]);
 
     const handleSelection = (option: any) => {
         if (option) setDisplaySelection(option);
     }
-    console.log(selectedDate.endDay)
+
     return (
         <div className="hours-container">
             <div className="hours-inner">

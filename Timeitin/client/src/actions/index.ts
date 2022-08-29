@@ -138,17 +138,45 @@ export const fetchDailyHours = (date: Date) => {
   };
 };
 
-export const fetchRequestedHours = (date: Date, endDay?: number) => {
+const getMonths = (month: number) => {
+  if (month === 12) {
+    return "1";
+  }
+  return (month + 1).toString();
+};
+
+export const fetchRequestedHours = (
+  date: Date,
+  endDay?: number,
+  monthOnly?: boolean
+) => {
   const settingDate = getDate(date);
   return async function (dispatch: Dispatch<Action>) {
     try {
       let response = null;
       // if weekly hours are requested, get all the hours from the week
       if (endDay) {
+        var nextMonth = null;
+        // if the ending week of the month is selected we need to pass the next month as well
+        if (Number(settingDate.day) > endDay) {
+          nextMonth = getMonths(Number(settingDate.month));
+        }
         response = await api.getWeeklyHours(
           settingDate.year,
           settingDate.month,
-          range(Number(settingDate.day), endDay)
+          range(
+            Number(settingDate.day),
+            endDay,
+            Number(settingDate.month),
+            Number(settingDate.year)
+          ),
+          nextMonth
+        );
+      } // if monthly hours are requested, get all the hours from the month
+      else if (monthOnly) {
+        response = await api.getMonthlyHours(
+          settingDate.year,
+          settingDate.month
         );
       } // if daily hours are requested, get all the hours from the day
       else if (settingDate.day) {
@@ -158,12 +186,7 @@ export const fetchRequestedHours = (date: Date, endDay?: number) => {
           settingDate.day
         );
       } // if monthly hours are requested, get all the hours from the month
-      else if (settingDate.month) {
-        response = await api.getMonthlyHours(
-          settingDate.year,
-          settingDate.month
-        );
-      } // if yearly hours are requested, get all the hours from the year
+      // if yearly hours are requested, get all the hours from the year
       else if (settingDate.year) {
         response = await api.getYearlyHours(settingDate.year);
       }
